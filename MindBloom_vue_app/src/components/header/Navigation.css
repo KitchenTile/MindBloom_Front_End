@@ -1,0 +1,11 @@
+.container{
+    width: auto;
+    height: 100%;
+}
+
+.button {
+    height: 80%;
+    background-color: transparent;
+    border: 2px #fff solid;
+    border-radius: 10px;
+}
