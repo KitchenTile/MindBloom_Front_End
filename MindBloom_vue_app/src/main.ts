@@ -14,9 +14,10 @@ import {
   faUsers,
   faCartShopping,
   faFilter,
+  faTrash,
 } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faBook, faMoneyBillWave, faLocationDot, faUsers, faCartShopping, faFilter)
+library.add(faBook, faMoneyBillWave, faLocationDot, faUsers, faCartShopping, faFilter, faTrash)
 
 const app = createApp(App)
 
