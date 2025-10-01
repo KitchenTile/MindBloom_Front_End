@@ -1,16 +1,3 @@
-// export const postCommunication = async (body: Object) => {
-//     try {
-//         const res = await fetch(`${baseURL + "/posts/communication"}`, {
-//             method: "POST",
-//             headers: { "content-type": "application/json" },
-//             body: JSON.stringify(body)
-//         })
-//          return res;
-//     } catch(error) {
-//         console.error(error)
-//     }
-// }
-
 export const placeOrder = async (order: Object) => {
   try {
     const res = await fetch('http://localhost:5000/orders', {
@@ -55,8 +42,8 @@ export const getAllLessons = async () => {
     }
 
     const data = await res.json()
-    console.log('data')
-    console.log(data)
+    // console.log('data')
+    // console.log(data)
     return data
   } catch (error) {
     console.error('error:' + error)
