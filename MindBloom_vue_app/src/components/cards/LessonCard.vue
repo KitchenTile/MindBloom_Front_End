@@ -15,7 +15,7 @@ const amount = ref(0)
 const hidden = computed(() => amount.value === 0)
 const compact = computed(() => amount.value === 0)
 
-const isDisabled = ref(false)
+const isDisabled = computed(() => cardProps.numOfSpaces === amount.value)
 const emit = defineEmits(['addToOrder'])
 
 const plusOne = () => {
@@ -56,7 +56,7 @@ const minusOne = () => {
           <span v-else :class="{ hidden: hidden }">-</span>
         </button>
         <p :class="{ hidden: hidden }">{{ amount }}</p>
-        <button class="add-button" @click="plusOne">+</button>
+        <button class="add-button" @click="plusOne" :disabled="isDisabled">+</button>
       </div>
     </div>
   </div>
