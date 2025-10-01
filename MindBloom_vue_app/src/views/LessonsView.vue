@@ -3,6 +3,7 @@ import Header from '../components/header/Header.vue'
 import LessonCard from '../components/cards/LessonCard.vue'
 import { getAllLessons, placeOrder, updateLessons } from '../api/fetchAPI'
 import { ref, onMounted } from 'vue'
+import './LessonsView.css'
 
 interface Lesson {
   topic: string
@@ -20,7 +21,6 @@ const addToOrder = (newOrder) => {
   const newItem = ref(true)
   for (let i = 0; i < order.value.length; i++) {
     if (order.value[i].lessonId === newOrder.lessonId) {
-      console.log(order.value[i].lessonId)
       order.value[i].numOfSpaces = newOrder.numOfSpaces
       newItem.value = false
     }
@@ -37,6 +37,30 @@ const placeOrderCall = async () => {
   fetchData()
 }
 
+const filterLessons = (criteria, ascdsc) => {
+  let filteredLessons = []
+  if (criteria === 'topic' || criteria === 'location') {
+    filteredLessons = cardInfo.value.sort((a, b) => {
+      const lessonA = a[criteria].toUpperCase()
+      const lessonB = b[criteria].toUpperCase()
+      if (lessonA < lessonB) {
+        return ascdsc ? 1 : -1
+      }
+      if (lessonA > lessonB) {
+        return ascdsc ? -1 : 1
+      }
+    })
+  } else {
+    filteredLessons = cardInfo.value.sort((a, b) =>
+      ascdsc ? a[criteria] - b[criteria] : b[criteria] - a[criteria],
+    )
+  }
+
+  console.log(filteredLessons)
+
+  return filteredLessons
+}
+
 async function fetchData() {
   error.value = null
   loading.value = true
@@ -49,14 +73,13 @@ async function fetchData() {
     error.value = err.toString()
   } finally {
     loading.value = false
+    filterLessons('numOfSpaces', true)
   }
 }
 
 onMounted(() => {
   fetchData()
 })
-
-console.log(error)
 </script>
 
 <template>
@@ -67,7 +90,7 @@ console.log(error)
     <div class="lesson-page-container">
       <div class="title-icon-contaianer">
         <h1 class="title">All Lessons</h1>
-        <font-awesome-icon icon="filter" />
+        <font-awesome-icon icon="filter" class="icon" />
       </div>
       <div v-for="lesson in cardInfo" :key="lesson._id">
         <LessonCard
