@@ -82,6 +82,11 @@
                 border: none;
                 color: white;
 
+                &.disabled {
+                    color: darkgray;
+                    cursor: not-allowed;
+                }
+
             }
 
             & .hidden{
