@@ -2,7 +2,7 @@
 import Header from '../components/header/Header.vue'
 import LessonCard from '../components/cards/LessonCard.vue'
 import { getAllLessons, placeOrder, updateLessons } from '../api/fetchAPI'
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import './LessonsView.css'
 
 interface Lesson {
@@ -16,6 +16,34 @@ const loading = ref(false)
 const cardInfo = ref<Lesson[]>([])
 const error = ref(null)
 const order = ref([])
+const filter = ref({ criteria: 'topic', ascending: true })
+
+const filterCriteria = ['topic', 'price', 'location', 'numOfSpaces']
+
+const filterLessons = computed(() => {
+  const lessonsCopy = [...cardInfo.value]
+
+  if (filter.value.criteria === 'topic' || filter.value.criteria === 'location') {
+    lessonsCopy.sort((a, b) => {
+      const lessonA = a[filter.value.criteria].toUpperCase()
+      const lessonB = b[filter.value.criteria].toUpperCase()
+      if (lessonA < lessonB) {
+        return filter.value.ascending ? -1 : 1
+      }
+      if (lessonA > lessonB) {
+        return filter.value.ascending ? 1 : -1
+      }
+    })
+  } else {
+    lessonsCopy.sort((a, b) =>
+      filter.value.ascending
+        ? b[filter.value.criteria] - a[filter.value.criteria]
+        : a[filter.value.criteria] - b[filter.value.criteria],
+    )
+  }
+
+  return lessonsCopy
+})
 
 const addToOrder = (newOrder) => {
   const newItem = ref(true)
@@ -37,29 +65,9 @@ const placeOrderCall = async () => {
   fetchData()
 }
 
-const filterLessons = (criteria, ascdsc) => {
-  let filteredLessons = []
-  if (criteria === 'topic' || criteria === 'location') {
-    filteredLessons = cardInfo.value.sort((a, b) => {
-      const lessonA = a[criteria].toUpperCase()
-      const lessonB = b[criteria].toUpperCase()
-      if (lessonA < lessonB) {
-        return ascdsc ? 1 : -1
-      }
-      if (lessonA > lessonB) {
-        return ascdsc ? -1 : 1
-      }
-    })
-  } else {
-    filteredLessons = cardInfo.value.sort((a, b) =>
-      ascdsc ? a[criteria] - b[criteria] : b[criteria] - a[criteria],
-    )
-  }
-
-  console.log(filteredLessons)
-
-  return filteredLessons
-}
+const setFilter = computed(() => {
+  console.log(filter.value)
+})
 
 async function fetchData() {
   error.value = null
@@ -73,7 +81,6 @@ async function fetchData() {
     error.value = err.toString()
   } finally {
     loading.value = false
-    filterLessons('numOfSpaces', true)
   }
 }
 
@@ -90,18 +97,34 @@ onMounted(() => {
     <div class="lesson-page-container">
       <div class="title-icon-contaianer">
         <h1 class="title">All Lessons</h1>
-        <font-awesome-icon icon="filter" class="icon" />
+        <div>
+          <font-awesome-icon icon="filter" class="icon" />
+          <div v-for="criteria in filterCriteria">
+            <input
+              type="radio"
+              :id="criteria"
+              :name="criteria"
+              :value="criteria"
+              class="radio-input"
+              v-model="filter.criteria"
+            />
+            <label :for="criteria">{{ criteria }}</label>
+          </div>
+        </div>
       </div>
-      <div v-for="lesson in cardInfo" :key="lesson._id">
-        <LessonCard
-          :id="lesson._id"
-          :topic="lesson.topic"
-          :price="lesson.price"
-          :location="lesson.location"
-          :numOfSpaces="lesson.numOfSpaces"
-          @addToOrder="addToOrder"
-        />
+      <div class="all-cards-container">
+        <div v-for="lesson in filterLessons" :key="lesson._id">
+          <LessonCard
+            :id="lesson._id"
+            :topic="lesson.topic"
+            :price="lesson.price"
+            :location="lesson.location"
+            :numOfSpaces="lesson.numOfSpaces"
+            @addToOrder="addToOrder"
+          />
+        </div>
       </div>
+      <button @click="">FILTER BUTTON</button>
       <button @click="placeOrderCall">PLACE ORDER</button>
     </div>
   </main>
