@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import './LessonCard.css'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { order, addToOrder } from '../../store/store'
 
 const cardProps = defineProps({
   topic: String,
@@ -11,22 +12,29 @@ const cardProps = defineProps({
   id: String,
 })
 
-const amount = ref(0)
+const amount = computed({
+  get() {
+    let item = null
+    for (let i = 0; i < order.length; i++) {
+      if (cardProps.id === order[i].lessonId) {
+        item = order[i]
+      }
+    }
+    return item && typeof item.numOfSpaces === 'number' ? item.numOfSpaces : 0
+  },
+  set(val: number) {
+    if (val <= 0) {
+      addToOrder({ lessonId: cardProps.id, numOfSpaces: 0 })
+    } else {
+      addToOrder({ lessonId: cardProps.id, numOfSpaces: val })
+    }
+  },
+})
+
 const hidden = computed(() => amount.value === 0)
 const compact = computed(() => amount.value === 0)
 
 const isDisabled = computed(() => cardProps.numOfSpaces === amount.value)
-const emit = defineEmits(['addToOrder'])
-
-const plusOne = () => {
-  amount.value++
-  emit('addToOrder', { lessonId: cardProps.id, numOfSpaces: amount.value })
-}
-
-const minusOne = () => {
-  amount.value--
-  emit('addToOrder', { lessonId: cardProps.id, numOfSpaces: amount.value })
-}
 </script>
 
 <template>
@@ -51,7 +59,7 @@ const minusOne = () => {
         <p id="spaces" class="description-text">{{ cardProps.numOfSpaces }}</p>
       </div>
       <div class="buttons-container" :class="{ compact: hidden }">
-        <button class="minus-button" :class="{ hidden: hidden }" @click="minusOne">
+        <button class="minus-button" :class="{ hidden: hidden }" @click="amount--">
           <font-awesome-icon v-if="amount === 1" icon="trash" class="icon" />
           <span v-else :class="{ hidden: hidden }">-</span>
         </button>
@@ -59,7 +67,7 @@ const minusOne = () => {
         <button
           class="add-button"
           :class="{ disabled: isDisabled }"
-          @click="plusOne"
+          @click="amount++"
           :disabled="isDisabled"
         >
           +
