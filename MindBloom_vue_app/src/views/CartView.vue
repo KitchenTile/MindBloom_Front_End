@@ -4,7 +4,7 @@ import LessonCard from '../components/cards/LessonCard.vue'
 import { getAllLessons, placeOrder, updateLessons } from '../api/fetchAPI'
 import { ref, onMounted, computed } from 'vue'
 import { order, addToOrder, clearOrder } from '../store/store'
-import './LessonsView.css'
+import './CartView.css'
 
 interface Lesson {
   topic: string
@@ -20,13 +20,11 @@ const name = ref(null)
 const number = ref(null)
 const error = ref(null)
 const isDisabled = computed(
-  () => order.length === 0 && name !== null && name !== '' && number !== null,
+  () => order.length === 0 || name.value === null || name.value === '' || number.value === null,
 )
 
 const fullOrders = computed(() => {
   const cartItems = ref([])
-  console.log('order')
-  console.log(order)
 
   if (order.length !== 0) {
     for (let i = 0; i < cardInfo.value.length; i++) {
@@ -37,9 +35,6 @@ const fullOrders = computed(() => {
       }
     }
   }
-
-  console.log('cartItems')
-  console.log(cartItems.value)
 
   return cartItems.value
 })
@@ -101,6 +96,10 @@ onMounted(() => {
             @addToOrder="addToOrder"
           />
         </div>
+      </div>
+      <div>
+        <input v-model="name" placeholder="Name" />
+        <input v-model="number" placeholder="Phone Number" />
       </div>
       <button @click="placeOrderCall" :disabled="isDisabled">PLACE ORDER</button>
     </div>
