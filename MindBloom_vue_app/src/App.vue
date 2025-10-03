@@ -6,19 +6,10 @@ import CartView from '@/views/CartView.vue'
 </script>
 
 <template>
-  <!-- <header>
-
-    <div class="wrapper">
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header> -->
   <Header />
 
-  <LessonsView />
-  <CartView />
+  <!-- <LessonsView /> -->
+  <!-- <CartView /> -->
   <RouterView />
 </template>
 
