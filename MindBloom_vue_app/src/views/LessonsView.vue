@@ -4,6 +4,7 @@ import LessonCard from '../components/cards/LessonCard.vue'
 import { getAllLessons, placeOrder, updateLessons } from '../api/fetchAPI'
 import { ref, onMounted, computed } from 'vue'
 import './LessonsView.css'
+import { order, addToOrder, clearOrder } from '../store/store'
 
 interface Lesson {
   topic: string
@@ -15,8 +16,7 @@ interface Lesson {
 const loading = ref(false)
 const cardInfo = ref<Lesson[]>([])
 const error = ref(null)
-const order = ref([])
-const filter = ref({ criteria: 'topic', ascending: true })
+const filter = ref({ criteria: 'topic', ascending: false })
 
 const filterCriteria = ['topic', 'price', 'location', 'numOfSpaces']
 
@@ -28,45 +28,21 @@ const filterLessons = computed(() => {
       const lessonA = a[filter.value.criteria].toUpperCase()
       const lessonB = b[filter.value.criteria].toUpperCase()
       if (lessonA < lessonB) {
-        return filter.value.ascending ? -1 : 1
+        return filter.value.ascending ? 1 : -1
       }
       if (lessonA > lessonB) {
-        return filter.value.ascending ? 1 : -1
+        return filter.value.ascending ? -1 : 1
       }
     })
   } else {
     lessonsCopy.sort((a, b) =>
       filter.value.ascending
-        ? b[filter.value.criteria] - a[filter.value.criteria]
-        : a[filter.value.criteria] - b[filter.value.criteria],
+        ? a[filter.value.criteria] - b[filter.value.criteria]
+        : b[filter.value.criteria] - a[filter.value.criteria],
     )
   }
 
   return lessonsCopy
-})
-
-const addToOrder = (newOrder) => {
-  const newItem = ref(true)
-  for (let i = 0; i < order.value.length; i++) {
-    if (order.value[i].lessonId === newOrder.lessonId) {
-      order.value[i].numOfSpaces = newOrder.numOfSpaces
-      newItem.value = false
-    }
-  }
-  if (newItem.value === true) {
-    order.value.push(newOrder)
-  }
-  console.log(order.value)
-}
-
-const placeOrderCall = async () => {
-  const result = await placeOrder({ name: 'AZUL', phoneNumber: 123, lessonsOrdered: order.value })
-  updateLessons(result)
-  fetchData()
-}
-
-const setFilter = computed(() => {
-  console.log(filter.value)
 })
 
 async function fetchData() {
@@ -110,6 +86,26 @@ onMounted(() => {
             />
             <label :for="criteria">{{ criteria }}</label>
           </div>
+          <div>
+            <input
+              type="radio"
+              id="asc"
+              name="asc"
+              :value="true"
+              class="radio-input"
+              v-model="filter.ascending"
+            />
+            <label for="asc">ascending</label>
+            <input
+              type="radio"
+              id="dsc"
+              name="dsc"
+              :value="false"
+              class="radio-input"
+              v-model="filter.ascending"
+            />
+            <label for="dsc">descending</label>
+          </div>
         </div>
       </div>
       <div class="all-cards-container">
@@ -120,12 +116,9 @@ onMounted(() => {
             :price="lesson.price"
             :location="lesson.location"
             :numOfSpaces="lesson.numOfSpaces"
-            @addToOrder="addToOrder"
           />
         </div>
       </div>
-      <button @click="">FILTER BUTTON</button>
-      <button @click="placeOrderCall">PLACE ORDER</button>
     </div>
   </main>
 </template>
