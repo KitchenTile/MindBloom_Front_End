@@ -1,20 +1,10 @@
-<script lang="ts"></script>
+<script lang="ts">
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+</script>
 
 <template>
   <nav>
-    <!-- <ul>
-      <li>
-        <router-link to="/">Home</router-link>
-      </li>
-      <li>
-        <router-link to="/about">About</router-link>
-      </li>
-      <li>
-        <router-link to="/contact">Contact</router-link>
-      </li>
-    </ul> -->
-
-    <RouterLink to="/">Home</RouterLink>
-    <RouterLink to="/about">About</RouterLink>
+    <RouterLink to="/lessons">Lessons</RouterLink>
+    <RouterLink to="/cart"> <font-awesome-icon icon="cart-shopping" /> </RouterLink>
   </nav>
 </template>
