@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import './Header.css'
 import Navigation from './Navigation.vue'
+import Search from './Search.vue'
 </script>
 
 <template>
@@ -13,5 +14,6 @@ import Navigation from './Navigation.vue'
     </div>
     <h1 class="title">MIND BLOOM</h1>
     <Navigation />
+    <Search />
   </div>
 </template>
