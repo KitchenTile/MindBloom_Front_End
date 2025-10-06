@@ -9,12 +9,22 @@
     align-items: center;
     padding-inline: 20px;
     overflow: hidden;
+    justify-content: space-between;
+
+    & .image-container{
+        width: 60px;
+
+        & a{
+            height: 60px;
+        }
+    }
 
     & .logo{
         height: 10%;
-        width: 15%;
-        
+        width: 100%;
     }
+
+
 
     & .title{
         color: #fff
