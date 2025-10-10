@@ -1,6 +1,11 @@
-.container{
-    width: auto;
-    height: 100%;
+.nav-search-container{
+    display: flex;
+    gap: 10px;
+
+    & nav {
+        display: flex;
+        gap: 10px;
+    }
 }
 
 .button {

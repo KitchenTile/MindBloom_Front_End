@@ -1,10 +1,9 @@
 
 .search-container{
     display: flex;
-    width: 360px;
+    width: 280px;
     right: 10.5em;
-    height: 100%;
-    position: absolute;
+    height: 90%;
     align-items: center;
     background-color: transparent;
     
@@ -18,9 +17,9 @@
             border: none;
             background-color: transparent;
             border-radius: 20px;
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: 400;
-            height: 2.5em;
+            height: 1.9em;
             width: 10%;
             font-family: inherit;
             float: right;
@@ -41,6 +40,7 @@
             text-decoration: underline;
             border-bottom: none;
             outline: none;
+            background-color: hsla(160, 100%, 37%, 1);
     
             &::placeholder{
                 color: white;
@@ -60,12 +60,16 @@
         
         & svg{
             position: absolute;
-            font-size: 1.6em;
+            font-size: 15px;
             right: 0.4em;
             top: 0em;
             transform: translateY(6px);
             z-index: -1;
 
+            & path{
+                fill: hsla(160, 100%, 37%, 1);
+
+            }
         }
     }
 }

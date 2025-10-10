@@ -1,6 +1,6 @@
 .header {
     display: flex;
-    height: 70px;
+    height: 50px;
     width: 95vw;
     background-color: transparent;
     position: absolute;
@@ -17,24 +17,42 @@
     backdrop-filter: blur(1px);
     transform: translateX(-50%);
 
-    & .image-container{
-        width: 50px;
-        transform: translateY(3px);
-        
-        & a{
-            height: 50px;
+    & {
+        .iamge-title-container{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 10px;
+        }
+        & .image-container{
+            width: 50px;
+            transform: translateY(3px);
+            
+            & a{
+                display: block;
+            }
+        }
+    
+        & .logo{
+            height: 15px;
+            width: 100%;
+        }
+    
+    
+    
+        & .title{
+            font-size: 1rem;
+            font-weight: 600;
+            color: #F9FAFB; 
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
     }
 
-    & .logo{
-        height: 10%;
-        width: 100%;
-    }
-
-
-
-    & .title{
-        color: #fff
+    & .nav-search-container{
+        display: flex;
+        gap: 5px;
+        align-items: center;
     }
 }
 

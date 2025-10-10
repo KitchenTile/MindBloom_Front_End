@@ -18,12 +18,6 @@ const compact = computed(() => hasFocus)
 
 const emit = defineEmits(['addToOrder'])
 
-const handleFocus = (value) => {
-  hasFocus(value)
-}
-
-//   @focusin="handleFocus(true)"
-//   @focusin="handleFocus(false)"
 </script>
 
 <template>
@@ -35,7 +29,7 @@ const handleFocus = (value) => {
         class="search-input"
         v-model="searchTerm"
       />
-      <svg
+      <!-- <svg
         width="30"
         height="30"
         viewBox="0 0 33 32"
@@ -54,7 +48,8 @@ const handleFocus = (value) => {
           d="M14.0003 6.66667C10.3184 6.66667 7.33366 9.65143 7.33366 13.3333C7.33366 17.0152 10.3184 20 14.0003 20C17.6822 20 20.667 17.0152 20.667 13.3333C20.667 9.65143 17.6822 6.66667 14.0003 6.66667ZM4.66699 13.3333C4.66699 8.17868 8.84567 4 14.0003 4C19.155 4 23.3337 8.17868 23.3337 13.3333C23.3337 18.488 19.155 22.6667 14.0003 22.6667C8.84567 22.6667 4.66699 18.488 4.66699 13.3333Z"
           fill="#212529"
         />
-      </svg>
+      </svg> -->
+       <font-awesome-icon icon="magnifying-glass" /> 
       <div class="search-results">
         <!-- {searchTerm !== "" ? (
             mergeAndSort.uniqueShows.length > 0 ? (

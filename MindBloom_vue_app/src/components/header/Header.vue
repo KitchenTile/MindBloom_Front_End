@@ -7,13 +7,17 @@ import Search from './Search.vue'
 
 <template>
   <div class="header">
-    <div class="image-container">
-      <a href="">
-        <img src="@/assets\MBSVGbeige.svg" alt="" class="logo" />
-      </a>
+    <div class="iamge-title-container">
+      <div class="image-container">
+        <a href="/">
+          <img src="@/assets\MBSVGbeige.svg" alt="" class="logo" />
+        </a>
+      </div>
+      <h1 class="title">MIND BLOOM</h1>
     </div>
-    <h1 class="title">MIND BLOOM</h1>
+    <div class="nav-search-container">
+      <Search />
     <Navigation />
-    <Search />
+    </div>
   </div>
 </template>
