@@ -55,7 +55,7 @@ export const handleChat = async (userQuery: string) => {
     const res = await fetch('http://localhost:5000/chat', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
-      body: JSON.stringify(userQuery),
+      body: JSON.stringify({userQuery}),
     })
 
     const data = await res.json()
