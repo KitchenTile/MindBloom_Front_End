@@ -49,3 +49,20 @@ export const getAllLessons = async () => {
     console.error('error:' + error)
   }
 }
+
+export const handleChat = async (userQuery: string) => {
+  try{
+    const res = await fetch('http://localhost:5000/chat', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(userQuery),
+    })
+
+    const data = await res.json()
+    console.log('User Question:', userQuery)
+
+    return data
+    } catch (error) {
+    console.log(error)
+  }
+}
