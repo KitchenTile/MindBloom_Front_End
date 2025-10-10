@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import Header from '../components/header/Header.vue'
 import LessonCard from '../components/cards/LessonCard.vue'
-import { getAllLessons, placeOrder, updateLessons } from '../api/fetchAPI'
+import { getAllLessons } from '../api/fetchAPI'
 import { ref, onMounted, computed } from 'vue'
 import './LessonsView.css'
-import { order, addToOrder, clearOrder } from '../store/store'
 
 interface Lesson {
   topic: string
