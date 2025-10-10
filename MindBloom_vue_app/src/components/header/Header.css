@@ -1,21 +1,28 @@
 .header {
-    height: 70px;
-    width: 100vw;
-    background-color: #1D5236;
-    position: absolute;
-    top: 0;
-    left: 0;
     display: flex;
+    height: 70px;
+    width: 95vw;
+    background-color: transparent;
+    position: absolute;
+    top: 2%;
+    left: 50%;
     align-items: center;
     padding-inline: 20px;
     overflow: hidden;
     justify-content: space-between;
+    border-radius: 10px;
+    border: 2px solid #1D5236;
+    z-index: 2;
+    background-color: rgba(18, 18, 18, 0.191);
+    backdrop-filter: blur(1px);
+    transform: translateX(-50%);
 
     & .image-container{
-        width: 60px;
-
+        width: 50px;
+        transform: translateY(3px);
+        
         & a{
-            height: 60px;
+            height: 50px;
         }
     }
 
