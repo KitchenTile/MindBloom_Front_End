@@ -4,7 +4,6 @@
   max-width: 1280px;
   margin: 0;
   padding: 0;
-  /* padding: 2rem; */
   font-weight: normal;
   background-color: #121212;
   background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
@@ -34,6 +33,5 @@ a,
   #app {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    /* padding: 0 2rem; */
   }
 }
