@@ -40,7 +40,7 @@
             text-decoration: underline;
             border-bottom: none;
             outline: none;
-            background-color: hsla(160, 100%, 37%, 1);
+            border: 1px solid hsla(160, 100%, 37%, 1);
     
             &::placeholder{
                 color: white;
@@ -61,7 +61,7 @@
         & svg{
             position: absolute;
             font-size: 15px;
-            right: 0.4em;
+            right: 0.8em;
             top: 0em;
             transform: translateY(6px);
             z-index: -1;
