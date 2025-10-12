@@ -15,10 +15,10 @@ const handleSubmit = async () => {
   if (prompt.value === "") return; 
 
   chat.value.push(prompt.value)
-  // const gptResponse = await handleChat(prompt.value)
+  const gptResponse = await handleChat(prompt.value)
 
-  // console.log(gptResponse)
-  // chat.value.push(gptResponse);
+  console.log(gptResponse)
+  chat.value.push(gptResponse);
   prompt.value = ""
 }
 
