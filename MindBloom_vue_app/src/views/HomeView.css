@@ -115,6 +115,7 @@
             height: auto;
             border: 1px solid;
             border-color: #4b5563;
+            white-space: pre-line;
 
             & p {
               word-break: break-all;
@@ -123,6 +124,18 @@
           &.right {
             justify-content: flex-end;
           }
+        }
+
+        & .loading {
+          margin: 10px;
+          width: 60px;
+          aspect-ratio: 4;
+          background:
+            no-repeat radial-gradient(circle closest-side, #383838 90%, #0000) 0% 50%,
+            no-repeat radial-gradient(circle closest-side, #383838 90%, #0000) 50% 50%,
+            no-repeat radial-gradient(circle closest-side, #383838 90%, #0000) 100% 50%;
+          background-size: calc(100% / 3) 100%;
+          animation: loading 0.75s linear infinite;
         }
       }
 
@@ -184,5 +197,26 @@
         transition: color 0.2s;
       }
     }
+  }
+}
+
+@keyframes loading {
+  33% {
+    background-size:
+      calc(100% / 3) 0,
+      calc(100% / 3) 100%,
+      calc(100% / 3) 100%;
+  }
+  50% {
+    background-size:
+      calc(100% / 3) 100%,
+      calc(100% / 3) 0,
+      calc(100% / 3) 100%;
+  }
+  66% {
+    background-size:
+      calc(100% / 3) 100%,
+      calc(100% / 3) 100%,
+      calc(100% / 3) 0%;
   }
 }
