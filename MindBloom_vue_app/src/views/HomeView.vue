@@ -15,7 +15,6 @@ interface Chat {
 
 const loading = ref<boolean>(false)
 const prompt = ref<string>('')
-const topic = ref<string>('TOPIC')
 const chatContainer = ref<HTMLDivElement | null>(null)
 const chats = ref<Chat[]>([])
 const chat = ref<string[]>([])
@@ -23,16 +22,27 @@ const chatId = ref<string>('')
 const chatIdToEdit = ref<string | null>(null)
 const newTitle = ref<string>('')
 
-const computedCurrentChat = computed(() => {
-  //filter current chat
-  const currentChat = chats.value.filter((chat) => chat.chat_id === chatId.value)
-  //get current chat's messages
-  const currentChatMessages = currentChat[0].messages.map((message) => {
-    return message.content
-  })
-  //display current chat
-  chat.value = currentChatMessages
-})
+// watcher to keep an eye on chatId and change the current chat view
+watch(
+  chatId,
+  (newChatId) => {
+    // Try to find the chat object in the main list
+    const chatData = chats.value.find((chat) => chat.chat_id === newChatId)
+
+    // If an existing chat object is found, load its messages
+    if (chatData) {
+      chat.value = chatData.messages.map((message) => message.content)
+      return
+    }
+
+    // If the ID is empty, clear the display
+    if (newChatId === '') {
+      chat.value = []
+      return
+    }
+  },
+  { immediate: true },
+)
 
 const handleSubmit = async () => {
   if (prompt.value === '') return
@@ -43,16 +53,20 @@ const handleSubmit = async () => {
 
   chat.value.push(prompt.value)
 
+  //loading bubble
+  loading.value = true
+
   const gptResponse: string | undefined = await handleChat(prompt.value, chatId.value)
+
+  //update the chats section
+  await fetchChats()
+  loading.value = false
 
   if (!gptResponse) return console.error('GPT response was undefined')
 
   console.log(gptResponse)
   chat.value.push(gptResponse)
   prompt.value = ''
-
-  //update the chats section
-  await fetchChats()
 }
 
 const deleteChatFunction = async (chatId: string) => {
@@ -61,6 +75,7 @@ const deleteChatFunction = async (chatId: string) => {
     await deleteChat(chatId)
     //update the chats section
     await fetchChats()
+    addNewChat()
   } catch (error) {
     console.log(error)
   }
@@ -132,7 +147,6 @@ onMounted(() => {
 
 <template>
   <main>
-    <div v-if="loading" class="loading">Loading...</div>
     <div class="home-page-container">
       <div class="chats-chat-container">
         <div class="all-chats-container">
@@ -146,11 +160,18 @@ onMounted(() => {
               class="chat-button"
               :for="chat"
               :id="`chat-${index}`"
-              @click="[(chatId = chat.chat_id), computedCurrentChat]"
+              @click="[(chatId = chat.chat_id)]"
             >
               {{ chat.title }}
             </button>
-            <input v-else class="title-edit" :for="chat" v-model="newTitle" />
+            <input
+              v-else
+              class="title-edit"
+              :for="chat"
+              v-model="newTitle"
+              @keyup.enter="editTitleFunction(chat.chat_id, newTitle)"
+              @keyup.escape="cancelTitleEdit()"
+            />
             <div style="display: flex; gap: 5px">
               <font-awesome-icon
                 icon="pen-to-square"
@@ -183,6 +204,7 @@ onMounted(() => {
             >
               <p :for="message" :id="`m-${index}`" class="chat-message">{{ message }}</p>
             </div>
+            <div v-if="loading" class="loading"></div>
           </div>
           <div class="chat-form-container fade-in fade-in-delay-3">
             <div class="chat-form">
@@ -192,6 +214,7 @@ onMounted(() => {
                 name="chat-input"
                 v-model="prompt"
                 class="chat-input"
+                v-on:keyup.enter="handleSubmit"
               />
               <button class="chat-submit-button" aria-label="Start Chat" v-on:click="handleSubmit">
                 <svg
