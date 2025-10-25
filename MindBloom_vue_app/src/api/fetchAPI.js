@@ -1,12 +1,4 @@
-interface Chats {
-  chat_id: string
-  user_id: string
-  title: string
-  messages: []
-  created_at: string
-}
-
-export const placeOrder = async (order: Object) => {
+export const placeOrder = async (order) => {
   try {
     const res = await fetch('http://localhost:5000/orders', {
       method: 'POST',
@@ -27,10 +19,9 @@ export const placeOrder = async (order: Object) => {
   }
 }
 
-export const updateLessons = async (id: string) => {
+export const updateLessons = async (id) => {
   try {
     const res = await fetch(`http://localhost:5000/lessons/${id}`, {
-      method: 'PUT',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify({ id: id }),
     })
@@ -65,7 +56,7 @@ export const getAllLessons = async () => {
   }
 }
 
-export const getAllChats = async (): Promise<Chats[] | undefined> => {
+export const getAllChats = async () => {
   try {
     const res = await fetch('http://localhost:5000/chat')
 
@@ -79,10 +70,7 @@ export const getAllChats = async (): Promise<Chats[] | undefined> => {
   }
 }
 
-export const handleChat = async (
-  userQuery: string,
-  chatId: string,
-): Promise<string | undefined> => {
+export const handleChat = async (userQuery, chatId) => {
   try {
     const res = await fetch('http://localhost:5000/chat', {
       method: 'POST',
@@ -104,7 +92,7 @@ export const handleChat = async (
   }
 }
 
-export const deleteChat = async (chatId: string): Promise<string | undefined> => {
+export const deleteChat = async (chatId) => {
   try {
     const res = await fetch('http://localhost:5000/chat', {
       method: 'DELETE',
@@ -125,10 +113,7 @@ export const deleteChat = async (chatId: string): Promise<string | undefined> =>
   }
 }
 
-export const editChatTitle = async (
-  chatId: string,
-  newTitle: string,
-): Promise<string | undefined> => {
+export const editChatTitle = async (chatId, newTitle) => {
   try {
     const res = await fetch('http://localhost:5000/chat', {
       method: 'PUT',

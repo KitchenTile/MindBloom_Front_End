@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import Header from '../components/header/Header.vue'
 import LessonCard from '../components/cards/LessonCard.vue'
 import { getAllLessons, placeOrder, updateLessons } from '../api/fetchAPI'
@@ -6,16 +6,8 @@ import { ref, onMounted, computed } from 'vue'
 import { order, addToOrder, clearOrder } from '../store/store'
 import './CartView.css'
 
-interface Lesson {
-  topic: string
-  price: number
-  location: string
-  numOfSpaces: number
-  id: number
-}
-
 const loading = ref(false)
-const cardInfo = ref<Lesson[]>([])
+const cardInfo = ref([])
 const name = ref(null)
 const number = ref(null)
 const error = ref(null)

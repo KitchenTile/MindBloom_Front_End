@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import { ref, computed, onMounted } from 'vue'
 import './LessonCard.css'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
@@ -22,7 +22,7 @@ const amount = computed({
     }
     return item && typeof item.numOfSpaces === 'number' ? item.numOfSpaces : 0
   },
-  set(val: number) {
+  set(val) {
     if (val <= 0) {
       addToOrder({ lessonId: cardProps.id, numOfSpaces: 0 })
     } else {

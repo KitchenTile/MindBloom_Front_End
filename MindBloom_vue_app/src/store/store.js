@@ -1,13 +1,8 @@
 import { ref, reactive } from 'vue'
 
-interface OrderItem {
-  lessonId: string
-  numOfSpaces: number
-}
+export const order = reactive([])
 
-export const order = reactive<OrderItem[]>([])
-
-export const addToOrder = (newOrder: OrderItem) => {
+export const addToOrder = (newOrder) => {
   const newItem = ref(true)
   for (let i = 0; i < order.length; i++) {
     if (order[i].lessonId === newOrder.lessonId) {

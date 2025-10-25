@@ -1,16 +1,96 @@
-.nav-search-container{
+.nav-search-container {
+  display: flex;
+  gap: 10px;
+
+  & nav {
     display: flex;
+    position: relative;
     gap: 10px;
 
-    & nav {
-        display: flex;
-        gap: 10px;
+    & #book {
+      &::before {
+        content: 'Lessons';
+        font-size: 12px;
+        background-color: rgba(0, 0, 0, 0.75);
+        border-radius: 5px;
+        padding: 5px 10px;
+        position: absolute;
+        top: 33px;
+        left: -38%;
+        opacity: 0;
+        visibility: hidden;
+        transition: 0.2s ease;
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 29px;
+        left: 12%;
+        border-top: 10px solid rgba(0, 0, 0, 0.75);
+        border-left: 10px solid transparent;
+        width: 1px;
+        height: 10px;
+        transform: rotate(-45deg);
+        opacity: 0;
+        visibility: hidden;
+        transition: 0.2s ease;
+      }
+
+      &:hover {
+        &::before,
+        &::after {
+          opacity: 1;
+          visibility: visible;
+          transition: 0.2s ease;
+        }
+      }
     }
+    & #cart {
+      &::before {
+        content: 'Cart';
+        font-size: 12px;
+        background-color: rgba(0, 0, 0, 0.75);
+        border-radius: 5px;
+        padding: 5px 10px;
+        position: absolute;
+        top: 33px;
+        left: 38%;
+        opacity: 0;
+        visibility: hidden;
+        transition: 0.2s ease;
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 29px;
+        left: 70%;
+        border-top: 10px solid rgba(0, 0, 0, 0.75);
+        border-left: 10px solid transparent;
+        width: 1px;
+        height: 10px;
+        transform: rotate(-45deg);
+        opacity: 0;
+        visibility: hidden;
+        transition: 0.2s ease;
+      }
+
+      &:hover {
+        &::before,
+        &::after {
+          opacity: 1;
+          visibility: visible;
+          transition: 0.2s ease;
+        }
+      }
+    }
+  }
 }
 
 .button {
-    height: 80%;
-    background-color: transparent;
-    border: 2px #fff solid;
-    border-radius: 10px;
+  height: 80%;
+  background-color: transparent;
+  border: 2px #fff solid;
+  border-radius: 10px;
 }

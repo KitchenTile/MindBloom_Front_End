@@ -102,7 +102,7 @@
 
           & .chat-message {
             display: flex;
-            background-color: rgb(17, 24, 39);
+            background-color: rgb(21 31 53);
             padding: 0.5rem 1rem;
             border-radius: 0.725rem;
             width: auto;
@@ -123,6 +123,10 @@
           }
           &.right {
             justify-content: flex-end;
+
+            & .chat-message {
+              background-color: rgb(17, 24, 39);
+            }
           }
         }
 

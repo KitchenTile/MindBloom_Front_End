@@ -1,19 +1,12 @@
-<script setup lang="ts">
+<script setup>
 import Header from '../components/header/Header.vue'
 import LessonCard from '../components/cards/LessonCard.vue'
 import { getAllLessons } from '../api/fetchAPI'
 import { ref, onMounted, computed } from 'vue'
 import './LessonsView.css'
 
-interface Lesson {
-  topic: string
-  price: number
-  location: string
-  numOfSpaces: number
-}
-
 const loading = ref(false)
-const cardInfo = ref<Lesson[]>([])
+const cardInfo = ref([])
 const error = ref(null)
 const filter = ref({ criteria: 'topic', ascending: false })
 

@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import { ref, computed } from 'vue'
 import './Search.css'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
@@ -17,7 +17,6 @@ const hasFocus = ref(false)
 const compact = computed(() => hasFocus)
 
 const emit = defineEmits(['addToOrder'])
-
 </script>
 
 <template>
@@ -49,7 +48,7 @@ const emit = defineEmits(['addToOrder'])
           fill="#212529"
         />
       </svg> -->
-       <font-awesome-icon icon="magnifying-glass" /> 
+      <font-awesome-icon icon="magnifying-glass" />
       <div class="search-results">
         <!-- {searchTerm !== "" ? (
             mergeAndSort.uniqueShows.length > 0 ? (

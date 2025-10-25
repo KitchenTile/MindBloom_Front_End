@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import { RouterLink, RouterView } from 'vue-router'
 import Header from '@/components/header/Header.vue'
 import LessonsView from '@/views/LessonsView.vue'

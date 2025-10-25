@@ -1,26 +1,18 @@
-<script setup lang="ts">
+<script setup>
 import { ref, onMounted, computed, nextTick, watch } from 'vue'
 import './HomeView.css'
 import { getAllChats, handleChat, deleteChat, editChatTitle } from '../api/fetchAPI'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { v4 as uuidv4 } from 'uuid'
 
-interface Chat {
-  chat_id: string
-  title: string
-  created_at: string
-  messages: { role: string; content: string; timestamp: string }[]
-  user_id: string
-}
-
-const loading = ref<boolean>(false)
-const prompt = ref<string>('')
-const chatContainer = ref<HTMLDivElement | null>(null)
-const chats = ref<Chat[]>([])
-const chat = ref<string[]>([])
-const chatId = ref<string>('')
-const chatIdToEdit = ref<string | null>(null)
-const newTitle = ref<string>('')
+const loading = ref(false)
+const prompt = ref('')
+const chatContainer = ref(null)
+const chats = ref([])
+const chat = ref([])
+const chatId = ref('')
+const chatIdToEdit = ref(null)
+const newTitle = ref('')
 
 // watcher to keep an eye on chatId and change the current chat view
 watch(
@@ -56,7 +48,7 @@ const handleSubmit = async () => {
   //loading bubble
   loading.value = true
 
-  const gptResponse: string | undefined = await handleChat(prompt.value, chatId.value)
+  const gptResponse = await handleChat(prompt.value, chatId.value)
 
   //update the chats section
   await fetchChats()
@@ -69,7 +61,7 @@ const handleSubmit = async () => {
   prompt.value = ''
 }
 
-const deleteChatFunction = async (chatId: string) => {
+const deleteChatFunction = async (chatId) => {
   try {
     //delete chat
     await deleteChat(chatId)
@@ -82,7 +74,7 @@ const deleteChatFunction = async (chatId: string) => {
 }
 
 //API call to change title
-const editTitleFunction = async (chatId: string, editedTitle: string) => {
+const editTitleFunction = async (chatId, editedTitle) => {
   try {
     const response = await editChatTitle(chatId, editedTitle)
     await fetchChats()
@@ -94,7 +86,7 @@ const editTitleFunction = async (chatId: string, editedTitle: string) => {
 }
 
 //title state managers
-const editTitle = (chatItem: Chat) => {
+const editTitle = (chatItem) => {
   chatIdToEdit.value = chatItem.chat_id
   newTitle.value = chatItem.title
 }
