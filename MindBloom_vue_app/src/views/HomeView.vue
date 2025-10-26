@@ -1,9 +1,12 @@
 <script setup>
 import { ref, onMounted, computed, nextTick, watch } from 'vue'
 import './HomeView.css'
-import { getAllChats, handleChat, deleteChat, editChatTitle } from '../api/fetchAPI'
+import { getAllChats, handleChat, deleteChat, editChatTitle, login, logout } from '../api/fetchAPI'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { v4 as uuidv4 } from 'uuid'
+import { user } from '../store/store'
+import { checkSession, supabase, userSessionCheck } from '../utils/supabase'
+import LogInModal from '../components/modals/LogInModal.vue'
 
 const loading = ref(false)
 const prompt = ref('')
@@ -36,6 +39,21 @@ watch(
   { immediate: true },
 )
 
+//make sure there's an user before fetching chats
+watch(
+  user,
+  (newUser) => {
+    if (newUser) {
+      // The user object just became available/updated, now fetch data
+      console.log(`User ${newUser.id} logged in. Fetching data...`)
+      fetchChats()
+    } else {
+      chats.value = []
+    }
+  },
+  { immediate: true },
+)
+
 const handleSubmit = async () => {
   if (prompt.value === '') return
 
@@ -44,11 +62,13 @@ const handleSubmit = async () => {
   }
 
   chat.value.push(prompt.value)
+  const userQuery = prompt.value
 
+  prompt.value = ''
   //loading bubble
   loading.value = true
 
-  const gptResponse = await handleChat(prompt.value, chatId.value)
+  const gptResponse = await handleChat(userQuery, chatId.value)
 
   //update the chats section
   await fetchChats()
@@ -58,9 +78,9 @@ const handleSubmit = async () => {
 
   console.log(gptResponse)
   chat.value.push(gptResponse)
-  prompt.value = ''
 }
 
+// delete chat
 const deleteChatFunction = async (chatId) => {
   try {
     //delete chat
@@ -131,15 +151,15 @@ watch(
   },
 )
 
-onMounted(() => {
-  console.log('FETCHING CHATS')
-  fetchChats()
+onMounted(async () => {
+  await userSessionCheck()
 })
 </script>
 
 <template>
   <main>
     <div class="home-page-container">
+      <LogInModal :modalActive="true" />
       <div class="chats-chat-container">
         <div class="all-chats-container">
           <div class="title-button-container">
