@@ -19,6 +19,7 @@ import {
   faPenToSquare,
   faCheck,
   faXmark,
+  faUser,
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -33,6 +34,7 @@ library.add(
   faPenToSquare,
   faCheck,
   faXmark,
+  faUser,
 )
 
 const app = createApp(App)
