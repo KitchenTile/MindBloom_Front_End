@@ -1,5 +1,7 @@
 import { ref, reactive } from 'vue'
 
+export const user = ref(null)
+
 export const order = reactive([])
 
 export const addToOrder = (newOrder) => {
