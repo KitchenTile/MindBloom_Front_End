@@ -78,6 +78,8 @@ export const handleChat = async (userQuery, chatId) => {
       body: JSON.stringify({ userQuery: userQuery, chatId: chatId }),
     })
 
+    console.log(userQuery)
+
     if (!res.ok) {
       throw new Error(`Failed to handle chat submition: ${res.status} ${res.statusText}`)
     }
@@ -131,5 +133,73 @@ export const editChatTitle = async (chatId, newTitle) => {
   } catch (error) {
     console.error('Error in API editChatTitle:', error)
     throw error
+  }
+}
+
+export const createUser = async (email, password, name, phoneNumber, role) => {
+  try {
+    const res = await fetch('http://localhost:5000/users/login', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({
+        email: email,
+        password: password,
+        name: name,
+        phoneNumber: phoneNumber,
+        role: role,
+      }),
+    })
+
+    if (!res.ok) {
+      throw new Error(`Failed to handle user creation: ${res.status} ${res.statusText}`)
+    }
+
+    const data = await res.json()
+    console.log('User created:', data)
+
+    return data
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const login = async (email, password) => {
+  try {
+    const res = await fetch('http://localhost:5000/users/login', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ email: email, password: password }),
+    })
+
+    if (!res.ok) {
+      throw new Error(`Failed to login: ${res.status} ${res.statusText}`)
+    }
+
+    const data = await res.json()
+    console.log('login:', data)
+
+    return data
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const logout = async () => {
+  try {
+    const res = await fetch('http://localhost:5000/users/logout', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+    })
+
+    if (!res.ok) {
+      throw new Error(`Failed to login: ${res.status} ${res.statusText}`)
+    }
+
+    const data = await res.json()
+    console.log('login:', data)
+
+    return data
+  } catch (error) {
+    console.log(error)
   }
 }
