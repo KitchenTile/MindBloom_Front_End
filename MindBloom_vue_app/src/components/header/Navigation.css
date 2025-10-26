@@ -16,7 +16,7 @@
         padding: 5px 10px;
         position: absolute;
         top: 33px;
-        left: -38%;
+        left: -23%;
         opacity: 0;
         visibility: hidden;
         transition: 0.2s ease;
@@ -26,7 +26,7 @@
         content: '';
         position: absolute;
         top: 29px;
-        left: 12%;
+        left: 8%;
         border-top: 10px solid rgba(0, 0, 0, 0.75);
         border-left: 10px solid transparent;
         width: 1px;
@@ -55,7 +55,7 @@
         padding: 5px 10px;
         position: absolute;
         top: 33px;
-        left: 38%;
+        left: 27%;
         opacity: 0;
         visibility: hidden;
         transition: 0.2s ease;
@@ -65,7 +65,47 @@
         content: '';
         position: absolute;
         top: 29px;
-        left: 70%;
+        left: 45%;
+        border-top: 10px solid rgba(0, 0, 0, 0.75);
+        border-left: 10px solid transparent;
+        width: 1px;
+        height: 10px;
+        transform: rotate(-45deg);
+        opacity: 0;
+        visibility: hidden;
+        transition: 0.2s ease;
+      }
+
+      &:hover {
+        &::before,
+        &::after {
+          opacity: 1;
+          visibility: visible;
+          transition: 0.2s ease;
+        }
+      }
+    }
+
+    & #user {
+      &::before {
+        content: 'User';
+        font-size: 12px;
+        background-color: rgba(0, 0, 0, 0.75);
+        border-radius: 5px;
+        padding: 5px 10px;
+        position: absolute;
+        top: 33px;
+        left: 62%;
+        opacity: 0;
+        visibility: hidden;
+        transition: 0.2s ease;
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 29px;
+        left: 81%;
         border-top: 10px solid rgba(0, 0, 0, 0.75);
         border-left: 10px solid transparent;
         width: 1px;
