@@ -1,28 +1,21 @@
 <script setup>
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import './modal.css'
+import { loginModalActice } from '../../store/store'
 
-// export default {
-//   props: ['modalActive'],
-// }
-
-const modalProps = defineProps({
-  modalActive: Boolean,
-})
-
-const modalActive = ref(true)
+const modalProps = defineProps(['modalActive'])
 
 const closeModal = () => {
-  modalActive.value = false
+  loginModalActice.value = false
 }
 </script>
 
 <template>
   <transition name="modal-animation">
-    <div class="modal" v-show="modalActive">
+    <div class="modal" v-show="modalProps.modalActive">
       <transition name="inner-modal-animation">
-        <div class="modal-inner" v-show="modalActive">
+        <div class="modal-inner" v-show="modalProps.modalActive">
           <font-awesome-icon icon="xmark" class="icon" @click="closeModal" />
           <slot />
         </div>
