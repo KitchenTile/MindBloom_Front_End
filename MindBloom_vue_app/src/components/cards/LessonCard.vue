@@ -4,13 +4,7 @@ import './LessonCard.css'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { order, addToOrder } from '../../store/store'
 
-const cardProps = defineProps({
-  topic: String,
-  price: Number,
-  location: String,
-  numOfSpaces: Number,
-  id: String,
-})
+const cardProps = defineProps(['topic', 'price', 'location', 'numOfSpaces', 'id'])
 
 const amount = computed({
   get() {
@@ -32,7 +26,6 @@ const amount = computed({
 })
 
 const hidden = computed(() => amount.value === 0)
-const compact = computed(() => amount.value === 0)
 
 const isDisabled = computed(() => cardProps.numOfSpaces === amount.value)
 </script>
