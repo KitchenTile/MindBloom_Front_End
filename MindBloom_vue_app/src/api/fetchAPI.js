@@ -138,7 +138,7 @@ export const editChatTitle = async (chatId, newTitle) => {
 
 export const createUser = async (email, password, name, phoneNumber, role) => {
   try {
-    const res = await fetch('http://localhost:5000/users/login', {
+    const res = await fetch('http://localhost:5000/users', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify({
@@ -146,7 +146,7 @@ export const createUser = async (email, password, name, phoneNumber, role) => {
         password: password,
         name: name,
         phoneNumber: phoneNumber,
-        role: role,
+        role: role ? 'admin' : 'student',
       }),
     })
 
@@ -198,6 +198,27 @@ export const logout = async () => {
     const data = await res.json()
     console.log('login:', data)
 
+    return data
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const uploadBook = async (file) => {
+  try {
+    const res = await fetch('http://localhost:5000/chat/upload', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ file: file }),
+    })
+
+    if (!res.ok) {
+      throw new Error(`Failed to upload book: ${res.status} ${res.statusText}`)
+    }
+
+    const data = await res.json()
+
+    console.log(data)
     return data
   } catch (error) {
     console.log(error)
