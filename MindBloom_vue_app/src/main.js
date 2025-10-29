@@ -20,6 +20,8 @@ import {
   faCheck,
   faXmark,
   faUser,
+  faArrowUpWideShort,
+  faArrowDownWideShort,
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -35,6 +37,8 @@ library.add(
   faCheck,
   faXmark,
   faUser,
+  faArrowUpWideShort,
+  faArrowDownWideShort,
 )
 
 const app = createApp(App)
