@@ -16,7 +16,7 @@
     width: auto;
     max-width: 1200px;
     padding: 30px;
-    height: 60%;
+    min-height: 60%;
     background-color: black;
     border: 2px solid #1d5236;
     border-radius: 10px;
