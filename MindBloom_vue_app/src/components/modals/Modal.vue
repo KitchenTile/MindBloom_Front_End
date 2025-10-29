@@ -1,13 +1,12 @@
 <script setup>
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { ref, watch } from 'vue'
 import './modal.css'
-import { loginModalActice } from '../../store/store'
 
 const modalProps = defineProps(['modalActive'])
+const modalEmit = defineEmits(['closeModal'])
 
-const closeModal = () => {
-  loginModalActice.value = false
+const closeButton = () => {
+  modalEmit('closeModal')
 }
 </script>
 
@@ -16,7 +15,7 @@ const closeModal = () => {
     <div class="modal" v-show="modalProps.modalActive">
       <transition name="inner-modal-animation">
         <div class="modal-inner" v-show="modalProps.modalActive">
-          <font-awesome-icon icon="xmark" class="icon" @click="closeModal" />
+          <font-awesome-icon icon="xmark" class="icon" @click="closeButton" />
           <slot />
         </div>
       </transition>
