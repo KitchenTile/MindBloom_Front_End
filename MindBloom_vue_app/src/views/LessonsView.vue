@@ -2,13 +2,14 @@
 import Header from '../components/header/Header.vue'
 import LessonCard from '../components/cards/LessonCard.vue'
 import { getAllLessons } from '../api/fetchAPI'
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted, computed, watch } from 'vue'
 import './LessonsView.css'
 
 const loading = ref(false)
 const cardInfo = ref([])
 const error = ref(null)
 const filter = ref({ criteria: 'topic', ascending: false })
+const filterOpen = ref(false)
 
 const filterCriteria = ['topic', 'price', 'location', 'numOfSpaces']
 
@@ -52,6 +53,10 @@ async function fetchData() {
   }
 }
 
+watch(filter.value, (newCriteria) => {
+  if (filterOpen) filterOpen.value = !filterOpen
+})
+
 onMounted(() => {
   fetchData()
 })
@@ -65,38 +70,51 @@ onMounted(() => {
     <div class="lesson-page-container">
       <div class="title-icon-contaianer">
         <h1 class="title">All Lessons</h1>
-        <div>
-          <font-awesome-icon icon="filter" class="icon" />
-          <div v-for="criteria in filterCriteria">
-            <input
-              type="radio"
-              :id="criteria"
-              :name="criteria"
-              :value="criteria"
-              class="radio-input"
-              v-model="filter.criteria"
-            />
-            <label :for="criteria">{{ criteria }}</label>
-          </div>
-          <div>
-            <input
-              type="radio"
-              id="asc"
-              name="asc"
-              :value="true"
-              class="radio-input"
-              v-model="filter.ascending"
-            />
-            <label for="asc">ascending</label>
-            <input
-              type="radio"
-              id="dsc"
-              name="dsc"
-              :value="false"
-              class="radio-input"
-              v-model="filter.ascending"
-            />
-            <label for="dsc">descending</label>
+        <div class="filter-container">
+          <font-awesome-icon icon="filter" class="icon" @click="() => (filterOpen = !filterOpen)" />
+          <div class="filter-inputs-container" :class="{ open: filterOpen }">
+            <div
+              v-for="criteria in filterCriteria"
+              class="filter-input"
+              :class="[
+                { hidden: !filterOpen },
+                { selected: filter.criteria === criteria && !filterOpen },
+              ]"
+            >
+              <input
+                type="radio"
+                :id="criteria"
+                :name="criteria"
+                :value="criteria"
+                class="radio-input"
+                v-model="filter.criteria"
+              />
+              <label :for="criteria">{{ criteria }}</label>
+              <div class="ascdsc-container" :class="{ hidden: filterOpen }">
+                <input
+                  type="radio"
+                  id="asc"
+                  name="asc"
+                  :value="!filter.ascending"
+                  class="radio-input"
+                  v-model="filter.ascending"
+                />
+                <label for="asc" v-if="filter.ascending"
+                  ><font-awesome-icon icon="arrow-up-wide-short"
+                /></label>
+                <input
+                  type="radio"
+                  id="dsc"
+                  name="dsc"
+                  :value="!filter.ascending"
+                  class="radio-input"
+                  v-model="filter.ascending"
+                />
+                <label for="dsc" v-if="!filter.ascending"
+                  ><font-awesome-icon icon="arrow-down-wide-short"
+                /></label>
+              </div>
+            </div>
           </div>
         </div>
       </div>
