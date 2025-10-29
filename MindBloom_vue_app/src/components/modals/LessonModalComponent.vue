@@ -1,0 +1,97 @@
+<script setup>
+import { ref, computed, onMounted } from 'vue'
+import './LessonModalComponent.css'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { order, addToOrder, lessonModalActive } from '../../store/store'
+import Modal from './Modal.vue'
+
+const modalProps = defineProps(['topic', 'price', 'location', 'numOfSpaces', 'id', 'modalActive'])
+
+const closeModal = () => {
+  lessonModalActive.value = { active: false, id: null }
+}
+
+const amount = computed({
+  get() {
+    let item = null
+    for (let i = 0; i < order.length; i++) {
+      if (modalProps.id === order[i].lessonId) {
+        item = order[i]
+      }
+    }
+    return item && typeof item.numOfSpaces === 'number' ? item.numOfSpaces : 0
+  },
+  set(val) {
+    if (val <= 0) {
+      addToOrder({ lessonId: modalProps.id, numOfSpaces: 0 })
+    } else {
+      addToOrder({ lessonId: modalProps.id, numOfSpaces: val })
+    }
+  },
+})
+
+// bar width calcs
+const barStyle = computed(() => {
+  const spacesLeft = (10 - modalProps.numOfSpaces) * 10
+  return {
+    width: spacesLeft + '%',
+  }
+})
+// add button class
+const hidden = computed(() => amount.value === 0)
+
+const isDisabled = computed(() => modalProps.numOfSpaces === amount.value)
+</script>
+
+<template>
+  <Modal :modalActive="modalProps.modalActive" @closeModal="closeModal">
+    <div class="lesson-modal-container">
+      <div class="img-info-container">
+        <div class="image-container">
+          <img src="@/assets\mindbloomsvgbeige.svg" alt="" class="image" />
+        </div>
+        <div class="text-container">
+          <h1 class="title">{{ modalProps.topic }}</h1>
+          <div class="spaces-display-container">
+            <div class="icon-p-container" id="space-bar">
+              <font-awesome-icon icon="users" />
+              <p id="spaces" class="description-text">Available spaces</p>
+              <p id="spaces" class="description-text" v-if="modalProps.numOfSpaces !== 0">
+                {{ modalProps.numOfSpaces }} / 10
+              </p>
+              <p id="full" class="description-text" v-else>full</p>
+            </div>
+            <div class="bar-container">
+              <div class="bar" :style="barStyle" />
+            </div>
+          </div>
+          <div class="icon-p-container">
+            <font-awesome-icon icon="location-dot" />
+            <p id="location" class="description-text">{{ modalProps.location }}</p>
+          </div>
+          <div class="icon-p-container">
+            <font-awesome-icon icon="money-bill-wave" />
+            <p id="price" class="description-text">{{ modalProps.price }}</p>
+          </div>
+          <div class="map-container"></div>
+
+          <div class="buttons-container" :class="{ compact: hidden }">
+            <button class="minus-button" :class="{ hidden: hidden }" @click="amount--">
+              <font-awesome-icon v-if="amount === 1" icon="trash" class="icon" />
+              <span v-else :class="{ hidden: hidden }">-</span>
+            </button>
+            <p :class="{ hidden: hidden }" class="amount-text">{{ amount }}</p>
+            <button
+              class="add-button"
+              :class="{ disabled: isDisabled }"
+              @click="amount++"
+              :disabled="isDisabled"
+            >
+              +
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </Modal>
+</template>
