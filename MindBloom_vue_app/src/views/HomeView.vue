@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { v4 as uuidv4 } from 'uuid'
 import { user } from '../store/store'
 import { checkSession, supabase, userSessionCheck } from '../utils/supabase'
-import LogInModal from '../components/modals/LogInModal.vue'
+import BookUploadCompoenet from '../components/BookUploadCompoenet.vue'
 
 const loading = ref(false)
 const prompt = ref('')
@@ -49,6 +49,7 @@ watch(
       fetchChats()
     } else {
       chats.value = []
+      chat.value = []
     }
   },
   { immediate: true },
@@ -92,6 +93,10 @@ const deleteChatFunction = async (chatId) => {
     console.log(error)
   }
 }
+
+// watch(loginModalActice, (val) => {
+//   console.log(val)
+// })
 
 //API call to change title
 const editTitleFunction = async (chatId, editedTitle) => {
@@ -159,7 +164,6 @@ onMounted(async () => {
 <template>
   <main>
     <div class="home-page-container">
-      <LogInModal :modalActive="true" />
       <div class="chats-chat-container">
         <div class="all-chats-container">
           <div class="title-button-container">
