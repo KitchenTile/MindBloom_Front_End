@@ -1,0 +1,154 @@
+.lesson-modal-container {
+  display: flex;
+  flex-direction: column;
+
+  & .img-info-container {
+    display: flex;
+    gap: 50px;
+
+    & .image-container {
+      position: relative;
+      height: 200px;
+      width: 200px;
+      top: 0;
+      object-fit: fill;
+
+      & .image {
+        width: 200px;
+        height: 200px;
+        object-fit: fill;
+      }
+    }
+
+    & .text-container {
+      background-color: #121212;
+      position: relative;
+      width: 300px;
+      height: 200px;
+      padding: 10px;
+      border-radius: 20px;
+
+      & .title {
+        font-size: 26px;
+        color: #fff;
+        padding-left: 6px;
+      }
+
+      & .spaces-display-container {
+        padding: 5px;
+        height: 39px;
+        background-color: #202020;
+        border-radius: 5px;
+        margin-bottom: 9px;
+      }
+
+      & .icon-p-container {
+        display: flex;
+        flex-direction: row;
+        gap: 5px;
+        margin-block: 5px;
+        font-size: 13px;
+        align-items: center;
+        padding-left: 6px;
+
+        &#space-bar {
+          justify-content: space-between;
+          padding-left: 0px;
+        }
+      }
+
+      & .bar-container {
+        background-color: black;
+        & .bar {
+          background-color: #1d5236;
+          height: 5px;
+          border-radius: 2px;
+          margin-top: 10px;
+          z-index: 2;
+        }
+      }
+
+      & .description-text {
+        line-height: 16px;
+
+        &#spaces {
+          line-height: 6px;
+          font-size: 14px;
+          padding-left: 0;
+        }
+      }
+
+      & .buttons-container {
+        position: absolute;
+        top: 16px;
+        right: 12px;
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        gap: 4px;
+        border-radius: 10%;
+        overflow: hidden;
+        border: 1px solid white;
+        interpolate-size: allow-keywords;
+        width: 65px;
+        transition: width 0.2s ease;
+        height: 28px;
+
+        & .amount-text {
+          font-size: 12px;
+          height: 20.5px;
+        }
+
+        & .minus-button {
+          height: 30px;
+          width: 30px;
+          border-radius: 20%;
+          cursor: pointer;
+          background-color: transparent;
+          border: none;
+          color: white;
+          transform: translateY(-1px);
+
+          &.icon {
+            font-size: 11px;
+          }
+        }
+
+        & .add-button {
+          height: 30px;
+          width: 30px;
+          cursor: pointer;
+          background-color: transparent;
+          border: none;
+          color: white;
+
+          &.disabled {
+            color: darkgray;
+            cursor: not-allowed;
+          }
+        }
+
+        & .hidden {
+          /* visibility: hidden;
+                  opacity: 0;
+                  width: 0px;
+                  margin: 0px;
+                  padding: 0px;
+                  transition: all 0.2s ease; */
+          display: none;
+        }
+
+        & .icon {
+          font-size: 11px;
+          color: white;
+        }
+
+        &.compact {
+          width: 28px;
+          border-radius: 20%;
+          transition: width 0.2s ease;
+        }
+      }
+    }
+  }
+}
