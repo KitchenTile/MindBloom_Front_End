@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import CartView from '../views/CartView.vue'
 import LessonsView from '../views/LessonsView.vue'
+import LogInModal from '../components/modals/ProfileModal.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -20,6 +21,12 @@ const router = createRouter({
       path: '/lessons',
       name: 'lessons',
       component: LessonsView,
+    },
+    {
+      path: '/',
+      name: 'profile',
+      component: LogInModal,
+      children: [{ path: 'profile', component: LogInModal }],
     },
     // {
     //   path: '/lesson/:id',
