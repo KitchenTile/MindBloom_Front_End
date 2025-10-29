@@ -1,16 +1,14 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterView } from 'vue-router'
 import Header from '@/components/header/Header.vue'
-import LessonsView from '@/views/LessonsView.vue'
-import CartView from '@/views/CartView.vue'
+import LogInModal from './components/modals/ProfileModal.vue'
+import { loginModalActive } from './store/store'
 </script>
 
 <template>
   <Header />
-
-  <!-- <LessonsView /> -->
-  <!-- <CartView /> -->
   <RouterView />
+  <LogInModal :modalActive="loginModalActive" />
 </template>
 
 <style scoped>
