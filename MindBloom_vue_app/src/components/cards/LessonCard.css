@@ -8,7 +8,7 @@
   overflow: hidden;
   box-shadow: 2px 3px 10px 0px #0000008c;
   margin: 20px;
-  background-color: black;
+  background-color: #121212;
 
   & .image-container {
     position: relative;
@@ -31,8 +31,17 @@
     padding: 5px;
 
     & .title {
-      font-size: 18;
+      font-size: 18px;
       color: #fff;
+      padding-left: 6px;
+    }
+
+    & .spaces-display-container {
+      padding: 5px;
+      height: 39px;
+      background-color: #202020;
+      border-radius: 5px;
+      margin-bottom: 9px;
     }
 
     & .icon-p-container {
@@ -40,26 +49,57 @@
       flex-direction: row;
       gap: 5px;
       margin-block: 5px;
+      font-size: 13px;
+      align-items: center;
+      padding-left: 6px;
+
+      &#space-bar {
+        justify-content: space-between;
+        padding-left: 0px;
+      }
+    }
+
+    & .bar-container {
+      background-color: black;
+      & .bar {
+        background-color: #1d5236;
+        height: 5px;
+        border-radius: 2px;
+        margin-top: 10px;
+        z-index: 2;
+      }
     }
 
     & .description-text {
       line-height: 16px;
+
+      &#spaces {
+        line-height: 6px;
+        font-size: 14px;
+        padding-left: 0;
+      }
     }
 
     & .buttons-container {
       position: absolute;
-      bottom: 15px;
-      right: 15px;
+      bottom: 10px;
+      right: 12px;
       display: flex;
       align-items: center;
       flex-direction: row;
-      gap: 2px;
+      gap: 4px;
       border-radius: 10%;
       overflow: hidden;
-      border: 2px solid white;
+      border: 1px solid white;
       interpolate-size: allow-keywords;
-      width: 75px;
+      width: 65px;
       transition: width 0.2s ease;
+      height: 28px;
+
+      & .amount-text {
+        font-size: 12px;
+        height: 20.5px;
+      }
 
       & .minus-button {
         height: 30px;
@@ -69,6 +109,11 @@
         background-color: transparent;
         border: none;
         color: white;
+        transform: translateY(-1px);
+
+        &.icon {
+          font-size: 11px;
+        }
       }
 
       & .add-button {
@@ -96,12 +141,12 @@
       }
 
       & .icon {
-        font-size: 12px;
+        font-size: 11px;
         color: white;
       }
 
       &.compact {
-        width: 34px;
+        width: 28px;
         border-radius: 20%;
         transition: width 0.2s ease;
       }
