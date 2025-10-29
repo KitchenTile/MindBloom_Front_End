@@ -87,15 +87,16 @@
     }
 
     & #user {
+      transform: translateX(-3px);
       &::before {
-        content: 'User';
+        content: 'Profile';
         font-size: 12px;
         background-color: rgba(0, 0, 0, 0.75);
         border-radius: 5px;
         padding: 5px 10px;
         position: absolute;
         top: 33px;
-        left: 62%;
+        left: -65%;
         opacity: 0;
         visibility: hidden;
         transition: 0.2s ease;
@@ -105,7 +106,7 @@
         content: '';
         position: absolute;
         top: 29px;
-        left: 81%;
+        left: 29%;
         border-top: 10px solid rgba(0, 0, 0, 0.75);
         border-left: 10px solid transparent;
         width: 1px;
@@ -133,4 +134,9 @@
   background-color: transparent;
   border: 2px #fff solid;
   border-radius: 10px;
+}
+
+.disabled {
+  pointer-events: none;
+  color: gray;
 }
