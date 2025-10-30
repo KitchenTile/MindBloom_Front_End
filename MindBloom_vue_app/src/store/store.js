@@ -4,7 +4,10 @@ import { ref, reactive } from 'vue'
 export const user = ref(null)
 
 //login modal
-export const loginModalActice = ref(false)
+export const loginModalActive = ref(false)
+
+//lesson modal
+export const lessonModalActive = ref({ active: false, id: null })
 
 // order state and logic
 export const order = reactive([])
