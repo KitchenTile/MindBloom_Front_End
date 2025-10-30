@@ -22,6 +22,7 @@ import {
   faUser,
   faArrowUpWideShort,
   faArrowDownWideShort,
+  faBookOpen,
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -39,6 +40,7 @@ library.add(
   faUser,
   faArrowUpWideShort,
   faArrowDownWideShort,
+  faBookOpen,
 )
 
 const app = createApp(App)
