@@ -63,7 +63,8 @@ body {
   color: var(--color-text);
   /* background: var(--color-background); */
   /* background-color: #EEE5D3; */
-    background-color: black;
+  background-color: black;
+  box-sizing: border-box;
 
   transition:
     color 0.5s,
