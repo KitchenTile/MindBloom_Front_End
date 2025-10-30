@@ -128,6 +128,7 @@ onMounted(() => {
             :price="lesson.price"
             :location="lesson.location"
             :numOfSpaces="lesson.numOfSpaces"
+            :search="false"
           />
           <LessonModalComponent
             :id="lesson._id"
