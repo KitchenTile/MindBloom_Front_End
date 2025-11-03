@@ -168,26 +168,34 @@ onMounted(async () => {
         <div class="all-chats-container">
           <div class="title-button-container">
             <h2 class="chats-title">Your Chats</h2>
-            <h2 class="add-chat-button" @click="addNewChat()">+</h2>
           </div>
-          <div class="chat" v-for="(chat, index) in chats" :key="chat.chat_id">
-            <button
-              v-if="chatIdToEdit !== chat.chat_id"
-              class="chat-button"
-              :for="chat"
-              :id="`chat-${index}`"
-              @click="[(chatId = chat.chat_id)]"
-            >
-              {{ chat.title }}
-            </button>
-            <input
-              v-else
-              class="title-edit"
-              :for="chat"
-              v-model="newTitle"
-              @keyup.enter="editTitleFunction(chat.chat_id, newTitle)"
-              @keyup.escape="cancelTitleEdit()"
-            />
+          <button class="add-chat-button" @click="addNewChat()">+ New Chat</button>
+          <div
+            class="chat"
+            v-for="(chat, index) in chats"
+            :key="chat.chat_id"
+            :class="{ selected: chatId === chat.chat_id }"
+          >
+            <div style="display: flex">
+              <div class="chat-tab" />
+              <button
+                v-if="chatIdToEdit !== chat.chat_id"
+                class="chat-button"
+                :for="chat"
+                :id="`chat-${index}`"
+                @click="[(chatId = chat.chat_id)]"
+              >
+                {{ chat.title }}
+              </button>
+              <input
+                v-else
+                class="title-edit"
+                :for="chat"
+                v-model="newTitle"
+                @keyup.enter="editTitleFunction(chat.chat_id, newTitle)"
+                @keyup.escape="cancelTitleEdit()"
+              />
+            </div>
             <div style="display: flex; gap: 5px">
               <font-awesome-icon
                 icon="pen-to-square"
