@@ -1,40 +1,91 @@
-.form {
-  height: 100%;
+.profile-container {
   width: 100%;
-  position: absolute;
-  left: 0;
-  top: 0;
-  overflow: hidden;
+  overflow: scroll;
   border-radius: 10px;
   padding: 30px;
   display: flex;
   flex-direction: column;
   background-color: #121212;
+  & .form {
+    & .logo-title-container {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
 
-  & input {
-    border: 1px solid rgb(55 65 81);
-    max-width: 20px;
+      & .title {
+        letter-spacing: 1.5px;
+        word-spacing: 0.05px;
+        color: white;
+      }
+      & svg {
+        width: 35px;
+        fill: hsla(160, 100%, 37%, 1);
+      }
+    }
+
+    & .input-label-container {
+      display: flex;
+      flex-direction: column;
+
+      & label {
+        padding-left: 5px;
+        font-weight: 600;
+        letter-spacing: 1.5px;
+      }
+
+      & input {
+        border: 2px solid rgb(55 65 81);
+        height: 40px;
+        background-color: rgb(17 24 39);
+        border-radius: 5px;
+        margin: 2px 0px 10px 5px;
+        color: white;
+        padding-block: 5px;
+        transition: 0.2s ease;
+
+        &:focus {
+          border: 2px solid hsla(160, 100%, 37%, 1);
+          outline: none;
+        }
+      }
+      &#admin-check {
+        flex-direction: row;
+        align-items: center;
+      }
+    }
+
+    & .register-text {
+      color: #1d5236;
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    & .button {
+      border-radius: 5px;
+      padding: 4px 10px;
+      color: black;
+      background-color: hsla(160, 100%, 37%, 1);
+      border: 2px solid #1d5236;
+      cursor: pointer;
+      width: 100%;
+      font-weight: 600;
+      height: 40px;
+      margin-block: 10px;
+
+      &:hover {
+        background-color: rgb(1, 171, 114);
+      }
+    }
+
+    & .hidden {
+      display: none;
+    }
+
+    /* &.register {
+      height: 565px;
+    } */
   }
-
-  & .button {
-    border-radius: 5px;
-    padding: 4px 10px;
-    color: #1d5236;
-    border: 2px solid #1d5236;
-    cursor: pointer;
-    max-height: 30px;
-  }
-
-  & .hidden {
-    display: none;
-  }
-}
-
-.button {
-  border-radius: 5px;
-  padding: 4px 10px;
-  color: #1d5236;
-  border: 2px solid #1d5236;
-  cursor: pointer;
-  max-height: 30px;
 }
