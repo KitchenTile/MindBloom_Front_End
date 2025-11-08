@@ -4,7 +4,7 @@ import './LessonCard.css'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { order, addToOrder, lessonModalActive } from '../../store/store'
 
-const cardProps = defineProps(['topic', 'price', 'location', 'numOfSpaces', 'id', 'search'])
+const cardProps = defineProps(['topic', 'price', 'location', 'availability', 'id', 'search'])
 
 const amount = computed({
   get() {
@@ -14,20 +14,20 @@ const amount = computed({
         item = order[i]
       }
     }
-    return item && typeof item.numOfSpaces === 'number' ? item.numOfSpaces : 0
+    return item && typeof item.availability === 'number' ? item.availability : 0
   },
   set(val) {
     if (val <= 0) {
-      addToOrder({ lessonId: cardProps.id, numOfSpaces: 0 })
+      addToOrder({ lessonId: cardProps.id, availability: 0 })
     } else {
-      addToOrder({ lessonId: cardProps.id, numOfSpaces: val })
+      addToOrder({ lessonId: cardProps.id, availability: val })
     }
   },
 })
 
 // bar width calcs
 const barStyle = computed(() => {
-  const spacesLeft = (10 - cardProps.numOfSpaces) * 10
+  const spacesLeft = (10 - cardProps.availability) * 10
   return {
     width: spacesLeft + '%',
   }
@@ -35,7 +35,7 @@ const barStyle = computed(() => {
 // add button class
 const hidden = computed(() => amount.value === 0)
 
-const isDisabled = computed(() => cardProps.numOfSpaces === amount.value)
+const isDisabled = computed(() => cardProps.availability === amount.value)
 
 const openLessonModal = () => {
   lessonModalActive.value = { active: true, id: cardProps.id }
@@ -58,8 +58,8 @@ const openLessonModal = () => {
         <div class="spaces-display-container" v-if="!search">
           <div class="icon-p-container" id="space-bar">
             <p id="spaces" class="description-text">Available spaces</p>
-            <p id="spaces" class="description-text" v-if="cardProps.numOfSpaces !== 0">
-              {{ cardProps.numOfSpaces }} / 10
+            <p id="spaces" class="description-text" v-if="cardProps.availability !== 0">
+              {{ cardProps.availability }} / 10
             </p>
             <p id="full" class="description-text" v-else>full</p>
           </div>
@@ -69,8 +69,8 @@ const openLessonModal = () => {
         </div>
         <div class="icon-p-container" v-else>
           <font-awesome-icon icon="users" />
-          <p class="description-text" v-if="cardProps.numOfSpaces !== 0">
-            {{ cardProps.numOfSpaces }}
+          <p class="description-text" v-if="cardProps.availability !== 0">
+            {{ cardProps.availability }}
           </p>
           <p id="full" class="description-text" v-else>full</p>
         </div>
