@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { order, addToOrder, lessonModalActive } from '../../store/store'
 import Modal from './Modal.vue'
 
-const modalProps = defineProps(['topic', 'price', 'location', 'numOfSpaces', 'id', 'modalActive'])
+const modalProps = defineProps(['topic', 'price', 'location', 'availability', 'id', 'modalActive'])
 
 const closeModal = () => {
   lessonModalActive.value = { active: false, id: null }
@@ -19,20 +19,20 @@ const amount = computed({
         item = order[i]
       }
     }
-    return item && typeof item.numOfSpaces === 'number' ? item.numOfSpaces : 0
+    return item && typeof item.availability === 'number' ? item.availability : 0
   },
   set(val) {
     if (val <= 0) {
-      addToOrder({ lessonId: modalProps.id, numOfSpaces: 0 })
+      addToOrder({ lessonId: modalProps.id, availability: 0 })
     } else {
-      addToOrder({ lessonId: modalProps.id, numOfSpaces: val })
+      addToOrder({ lessonId: modalProps.id, availability: val })
     }
   },
 })
 
 // bar width calcs
 const barStyle = computed(() => {
-  const spacesLeft = (10 - modalProps.numOfSpaces) * 10
+  const spacesLeft = (10 - modalProps.availability) * 10
   return {
     width: spacesLeft + '%',
   }
@@ -40,7 +40,7 @@ const barStyle = computed(() => {
 // add button class
 const hidden = computed(() => amount.value === 0)
 
-const isDisabled = computed(() => modalProps.numOfSpaces === amount.value)
+const isDisabled = computed(() => modalProps.availability === amount.value)
 </script>
 
 <template>
@@ -56,8 +56,8 @@ const isDisabled = computed(() => modalProps.numOfSpaces === amount.value)
             <div class="icon-p-container" id="space-bar">
               <font-awesome-icon icon="users" />
               <p id="spaces" class="description-text">Available spaces</p>
-              <p id="spaces" class="description-text" v-if="modalProps.numOfSpaces !== 0">
-                {{ modalProps.numOfSpaces }} / 10
+              <p id="spaces" class="description-text" v-if="modalProps.availability !== 0">
+                {{ modalProps.availability }} / 10
               </p>
               <p id="full" class="description-text" v-else>full</p>
             </div>
