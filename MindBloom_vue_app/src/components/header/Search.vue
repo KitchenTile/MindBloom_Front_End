@@ -22,9 +22,9 @@ const filteredLessons = computed(() => {
   )
 })
 
-watch(cardInfo, (newcardInfo) => {
-  console.log(newcardInfo)
-})
+// watch(cardInfo, (newcardInfo) => {
+//   console.log(newcardInfo)
+// })
 
 async function fetchData() {
   error.value = null
@@ -59,8 +59,6 @@ onMounted(async () => {
       <font-awesome-icon icon="magnifying-glass" class="search-icon" />
       <div class="search-results">
         <div v-for="(lesson, index) in filteredLessons" :key="index" v-if="searchTerm">
-          <!-- <div v-if=""> -->
-
           <LessonCard
             :id="lesson._id"
             :topic="lesson.topic"
@@ -69,7 +67,6 @@ onMounted(async () => {
             :numOfSpaces="lesson.numOfSpaces"
             :search="true"
           />
-          <!-- </div> -->
         </div>
       </div>
     </div>
