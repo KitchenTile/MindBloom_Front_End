@@ -1,14 +1,14 @@
 <script setup>
 import { RouterView } from 'vue-router'
 import Header from '@/components/header/Header.vue'
-import LogInModal from './components/modals/ProfileModal.vue'
 import { loginModalActive } from './store/store'
+import ProfileModalComponent from './components/modals/ProfileModalComponent.vue'
 </script>
 
 <template>
   <Header />
   <RouterView />
-  <LogInModal :modalActive="loginModalActive" />
+  <ProfileModalComponent :modalActive="loginModalActive" />
 </template>
 
 <style scoped>
