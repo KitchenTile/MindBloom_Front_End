@@ -1,6 +1,8 @@
+const AWS_URL = 'http://mindbloom-backend-env.eba-awc55pm9.eu-north-1.elasticbeanstalk.com'
+
 export const placeOrder = async (order) => {
   try {
-    const res = await fetch('http://localhost:5000/orders', {
+    const res = await fetch(`${AWS_URL}/orders`, {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(order),
@@ -21,7 +23,8 @@ export const placeOrder = async (order) => {
 
 export const updateLessons = async (id) => {
   try {
-    const res = await fetch(`http://localhost:5000/lessons/${id}`, {
+    const res = await fetch(`${AWS_URL}/lessons/${id}`, {
+      method: 'PUT',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify({ id: id }),
     })
@@ -41,7 +44,7 @@ export const updateLessons = async (id) => {
 
 export const getAllLessons = async () => {
   try {
-    const res = await fetch('http://localhost:5000/lessons')
+    const res = await fetch(`${AWS_URL}/lessons`)
 
     if (!res.ok) {
       throw new Error(`Failed to get all lessons: ${res.status} ${res.statusText}`)
@@ -58,7 +61,7 @@ export const getAllLessons = async () => {
 
 export const getAllChats = async () => {
   try {
-    const res = await fetch('http://localhost:5000/chat')
+    const res = await fetch(`${AWS_URL}/chat`)
 
     if (!res.ok) {
       throw new Error(`Failed to get all chats: ${res.status} ${res.statusText}`)
@@ -72,7 +75,7 @@ export const getAllChats = async () => {
 
 export const handleChat = async (userQuery, chatId) => {
   try {
-    const res = await fetch('http://localhost:5000/chat', {
+    const res = await fetch(`${AWS_URL}/chat`, {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify({ userQuery: userQuery, chatId: chatId }),
@@ -96,7 +99,7 @@ export const handleChat = async (userQuery, chatId) => {
 
 export const deleteChat = async (chatId) => {
   try {
-    const res = await fetch('http://localhost:5000/chat', {
+    const res = await fetch(`${AWS_URL}/chat`, {
       method: 'DELETE',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify({ chatId: chatId }),
@@ -117,7 +120,7 @@ export const deleteChat = async (chatId) => {
 
 export const editChatTitle = async (chatId, newTitle) => {
   try {
-    const res = await fetch('http://localhost:5000/chat', {
+    const res = await fetch(`${AWS_URL}/chat`, {
       method: 'PUT',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify({ chatId: chatId, newTitle: newTitle }),
@@ -138,7 +141,7 @@ export const editChatTitle = async (chatId, newTitle) => {
 
 export const createUser = async (email, password, name, phoneNumber, role) => {
   try {
-    const res = await fetch('http://localhost:5000/users', {
+    const res = await fetch(`${AWS_URL}/users`, {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify({
@@ -165,7 +168,7 @@ export const createUser = async (email, password, name, phoneNumber, role) => {
 
 export const login = async (email, password) => {
   try {
-    const res = await fetch('http://localhost:5000/users/login', {
+    const res = await fetch(`${AWS_URL}/users/login`, {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify({ email: email, password: password }),
@@ -186,7 +189,7 @@ export const login = async (email, password) => {
 
 export const logout = async () => {
   try {
-    const res = await fetch('http://localhost:5000/users/logout', {
+    const res = await fetch(`${AWS_URL}/users/logout`, {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
     })
@@ -206,7 +209,7 @@ export const logout = async () => {
 
 export const uploadBook = async (file) => {
   try {
-    const res = await fetch('http://localhost:5000/chat/upload', {
+    const res = await fetch(`${AWS_URL}/chat/upload`, {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify({ file: file }),
