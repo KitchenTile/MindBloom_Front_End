@@ -1,19 +1,16 @@
 <script setup>
 import Header from '../components/header/Header.vue'
 import LessonCard from '../components/cards/LessonCard.vue'
-import { getAllLessons } from '../api/fetchAPI'
 import { ref, onMounted, computed, watch } from 'vue'
 import './LessonsView.css'
 import LessonModalComponent from '../components/modals/LessonModalComponent.vue'
-import { lessonModalActive } from '../store/store'
+import { cardInfo, fetchData, lessonModalActive } from '../store/store'
 
 const loading = ref(false)
-const cardInfo = ref([])
-const error = ref(null)
 const filter = ref({ criteria: 'topic', ascending: false })
 const filterOpen = ref(false)
 
-const filterCriteria = ['topic', 'price', 'location', 'numOfSpaces']
+const filterCriteria = ['topic', 'price', 'location', 'availability']
 
 const filterLessons = computed(() => {
   const lessonsCopy = [...cardInfo.value]
@@ -39,21 +36,6 @@ const filterLessons = computed(() => {
 
   return lessonsCopy
 })
-
-async function fetchData() {
-  error.value = null
-  loading.value = true
-  cardInfo.value = []
-
-  try {
-    const data = await getAllLessons()
-    cardInfo.value = [...data]
-  } catch (err) {
-    error.value = err.toString()
-  } finally {
-    loading.value = false
-  }
-}
 
 watch(filter.value, (newCriteria) => {
   if (filterOpen) filterOpen.value = !filterOpen
@@ -127,7 +109,7 @@ onMounted(() => {
             :topic="lesson.topic"
             :price="lesson.price"
             :location="lesson.location"
-            :numOfSpaces="lesson.numOfSpaces"
+            :availability="lesson.availability"
             :search="false"
           />
           <LessonModalComponent
@@ -135,7 +117,7 @@ onMounted(() => {
             :topic="lesson.topic"
             :price="lesson.price"
             :location="lesson.location"
-            :numOfSpaces="lesson.numOfSpaces"
+            :availability="lesson.availability"
             :modalActive="lessonModalActive.active && lessonModalActive.id === lesson._id"
           />
         </div>
