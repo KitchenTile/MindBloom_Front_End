@@ -2,6 +2,7 @@
   height: 100vh;
   width: 100vw;
   padding-top: 8rem;
+  padding-inline: 20px;
 
   & .all-cards-container {
     display: flex;
@@ -13,9 +14,12 @@
     flex-direction: row;
     gap: 20px;
     align-items: center;
+    margin-left: 20px;
 
     & .title {
-      font-size: 24px;
+      font-size: 28px;
+      color: white;
+      font-weight: 600;
     }
 
     & .icon {
@@ -47,7 +51,7 @@
           padding: 2px 15px;
           border-radius: 10px;
           align-items: center;
-          width: 282px;
+          width: 280px;
           transition: all 0.5s ease;
 
           & .filter-input {
