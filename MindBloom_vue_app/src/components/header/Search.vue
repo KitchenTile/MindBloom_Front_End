@@ -3,14 +3,9 @@ import { ref, computed, onMounted, watch } from 'vue'
 import './Search.css'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import LessonCard from '../cards/LessonCard.vue'
-import { getAllLessons } from '../../api/fetchAPI'
+import { cardInfo, fetchData } from '../../store/store'
 
 const searchTerm = ref('')
-const hasFocus = ref(false)
-const error = ref(null)
-const cardInfo = ref([])
-// const hidden = computed(() => hasFocus)
-const compact = computed(() => hasFocus)
 
 const emit = defineEmits(['addToOrder'])
 
@@ -21,26 +16,6 @@ const filteredLessons = computed(() => {
     info.topic.toLowerCase().includes(searchTerm.value.toLocaleLowerCase()),
   )
 })
-
-// watch(cardInfo, (newcardInfo) => {
-//   console.log(newcardInfo)
-// })
-
-async function fetchData() {
-  error.value = null
-  cardInfo.value = []
-  console.log(cardInfo.value)
-
-  try {
-    const data = await getAllLessons()
-    cardInfo.value = [...data]
-  } catch (err) {
-    error.value = err.toString()
-  }
-  // } finally {
-  //   loading.value = false
-  // }
-}
 
 onMounted(async () => {
   await fetchData()
