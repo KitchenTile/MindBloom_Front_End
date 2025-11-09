@@ -88,4 +88,20 @@
       height: 565px;
     } */
   }
+  & .button {
+    border-radius: 5px;
+    padding: 4px 10px;
+    color: black;
+    background-color: hsla(160, 100%, 37%, 1);
+    border: 2px solid #1d5236;
+    cursor: pointer;
+    width: 100%;
+    font-weight: 600;
+    height: 40px;
+    margin-block: 10px;
+
+    &:hover {
+      background-color: rgb(1, 171, 114);
+    }
+  }
 }
