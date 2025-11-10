@@ -1,0 +1,86 @@
+.checkout-container {
+  border: 2px solid #1d5236;
+  border-radius: 10px;
+  padding: 30px;
+  width: 100%;
+  /* & .name-number-container {
+  } */
+
+  & .title {
+    font-weight: 600;
+  }
+
+  & .clickable-text {
+    color: #1d5236;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  & .order-recap-container {
+    & .total-container {
+      display: flex;
+      justify-content: space-between;
+
+      & .total-text {
+        color: white;
+        font-weight: 600;
+        font-size: 24;
+      }
+    }
+
+    & .lessons-container {
+      display: flex;
+      justify-content: space-between;
+      padding-left: 20px;
+      word-spacing: 10px;
+    }
+
+    & .line {
+      position: relative;
+      width: 50%;
+      height: 2px;
+      background-color: #1d5236;
+      display: flex;
+      margin: 20px auto;
+    }
+
+    & .name-number-container {
+      display: flex;
+      justify-content: space-between;
+
+      & input {
+        width: 48%;
+        border: 2px solid rgb(55 65 81);
+        height: 40px;
+        background-color: rgb(17 24 39);
+        border-radius: 5px;
+        margin: 2px 0px 5px 5px;
+        color: white;
+        padding-block: 5px;
+        transition: 0.2s ease;
+        padding-left: 10px;
+
+        &:focus {
+          border: 2px solid hsla(160, 100%, 37%, 1);
+          outline: none;
+        }
+      }
+    }
+  }
+}
+
+& .button {
+  border-radius: 5px;
+  padding: 4px 10px;
+  color: black;
+  background-color: hsla(160, 100%, 37%, 1);
+  border: 2px solid #1d5236;
+  cursor: pointer;
+  width: 100%;
+  font-weight: 600;
+  height: 40px;
+  margin-block: 10px;
+}
