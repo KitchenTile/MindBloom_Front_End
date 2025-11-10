@@ -33,6 +33,9 @@
 
         & svg {
           fill: hsla(160, 100%, 37%, 1);
+          width: 27px;
+          height: 27px;
+          transform: translateY(1px);
         }
       }
     }
