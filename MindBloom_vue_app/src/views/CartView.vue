@@ -3,17 +3,15 @@ import Header from '../components/header/Header.vue'
 import LessonCard from '../components/cards/LessonCard.vue'
 import { getAllLessons, placeOrder, updateLessons } from '../api/fetchAPI'
 import { ref, onMounted, computed } from 'vue'
-import { order, addToOrder, clearOrder } from '../store/store'
+import { order, addToOrder, user, cardInfo, fetchData, checkoutModalActive } from '../store/store'
 import './CartView.css'
+import CheckoutModalComponent from '../components/modals/CheckoutModalComponent.vue'
 
+const currentUser = ref(user)
+const guestCheckout = ref(false)
 const loading = ref(false)
-const cardInfo = ref([])
 const name = ref(null)
 const number = ref(null)
-const error = ref(null)
-const isDisabled = computed(
-  () => order.length === 0 || name.value === null || name.value === '' || number.value === null,
-)
 
 const fullOrders = computed(() => {
   const cartItems = ref([])
@@ -31,51 +29,36 @@ const fullOrders = computed(() => {
   return cartItems.value
 })
 
-const placeOrderCall = async () => {
-  const result = await placeOrder({
-    name: name.value,
-    phoneNumber: number.value,
-    lessonsOrdered: order,
-  })
-  updateLessons(result)
-  clearOrder()
-  fetchData()
-}
-
-async function fetchData() {
-  error.value = null
-  loading.value = true
-  cardInfo.value = []
-
-  try {
-    const data = await getAllLessons()
-    cardInfo.value = [...data]
-  } catch (err) {
-    error.value = err.toString()
-  } finally {
-    loading.value = false
-  }
-}
+// const placeOrderCall = async () => {
+//   const result = await placeOrder({
+//     name: currentUser ? currentUser.value.identities[0].identity_data.full_name : name.value,
+//     phoneNumber: currentUser
+//       ? currentUser.value.identities[0].identity_data.phone_number
+//       : number.value,
+//     lessonsOrdered: order,
+//   })
+//   console.log(result)
+//   await updateLessons(result)
+//   clearOrder()
+//   fetchData()
+// }
 
 onMounted(() => {
   fetchData()
 })
 
-onMounted(() => {
-  console.log(order)
-})
+// onMounted(() => {
+//   console.log(order)
+// })
 </script>
 
 <template>
   <main>
     <Header />
 
-    <div v-if="loading" class="loading">Loading...</div>
-    <div v-if="order.length === 0" class="loading">Loading...</div>
-
     <div class="lesson-page-container">
       <div class="title-icon-contaianer">
-        <h1 class="title">CART VIEW</h1>
+        <h1 class="title">Your Cart</h1>
       </div>
       <div class="all-cards-container">
         <div v-for="lesson in fullOrders" :key="lesson._id">
@@ -84,16 +67,13 @@ onMounted(() => {
             :topic="lesson.topic"
             :price="lesson.price"
             :location="lesson.location"
-            :numOfSpaces="lesson.numOfSpaces"
+            :availability="lesson.availability"
             @addToOrder="addToOrder"
           />
         </div>
       </div>
-      <div>
-        <input v-model="name" placeholder="Name" />
-        <input v-model="number" placeholder="Phone Number" />
-      </div>
-      <button @click="placeOrderCall" :disabled="isDisabled">PLACE ORDER</button>
+      <button @click="checkoutModalActive = true" class="button">Proceed To Checkout</button>
+      <CheckoutModalComponent :modalActive="checkoutModalActive" />
     </div>
   </main>
 </template>
