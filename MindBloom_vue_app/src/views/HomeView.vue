@@ -94,10 +94,6 @@ const deleteChatFunction = async (chatId) => {
   }
 }
 
-// watch(loginModalActice, (val) => {
-//   console.log(val)
-// })
-
 //API call to change title
 const editTitleFunction = async (chatId, editedTitle) => {
   try {
@@ -136,7 +132,12 @@ async function fetchChats() {
     if (!data) return console.error('data response was undefined')
 
     chats.value = [...data]
-    if (chats.value.length === 0) console.log('No chats available')
+
+    if (chats.value.length === 0) {
+      console.log('No chats available')
+    } else {
+      chatId.value = chats.value[0].chat_id
+    }
   } catch (err) {
     console.log(err)
   }
