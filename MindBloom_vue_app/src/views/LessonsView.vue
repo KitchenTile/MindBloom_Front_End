@@ -118,6 +118,7 @@ onMounted(() => {
             :price="lesson.price"
             :location="lesson.location"
             :availability="lesson.availability"
+            :map="lesson.map"
             :modalActive="lessonModalActive.active && lessonModalActive.id === lesson._id"
           />
         </div>
