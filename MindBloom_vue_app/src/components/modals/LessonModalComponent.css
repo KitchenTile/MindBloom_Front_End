@@ -1,6 +1,7 @@
 .lesson-modal-container {
   display: flex;
   flex-direction: column;
+  padding: 30px;
 
   & .img-info-container {
     display: flex;
@@ -149,6 +150,19 @@
           transition: width 0.2s ease;
         }
       }
+    }
+  }
+
+  .map-container {
+    .title {
+      color: white;
+      padding-block: 10px;
+    }
+    & .map {
+      border-radius: 15px;
+      width: 550px;
+      height: 300px;
+      border: 0;
     }
   }
 }
