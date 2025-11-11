@@ -5,7 +5,15 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { order, addToOrder, lessonModalActive } from '../../store/store'
 import Modal from './Modal.vue'
 
-const modalProps = defineProps(['topic', 'price', 'location', 'availability', 'id', 'modalActive'])
+const modalProps = defineProps([
+  'topic',
+  'price',
+  'location',
+  'availability',
+  'id',
+  'modalActive',
+  'map',
+])
 
 const closeModal = () => {
   lessonModalActive.value = { active: false, id: null }
@@ -73,7 +81,6 @@ const isDisabled = computed(() => modalProps.availability === amount.value)
             <font-awesome-icon icon="money-bill-wave" />
             <p id="price" class="description-text">{{ modalProps.price }}</p>
           </div>
-          <div class="map-container"></div>
 
           <div class="buttons-container" :class="{ compact: hidden }">
             <button class="minus-button" :class="{ hidden: hidden }" @click="amount--">
@@ -91,6 +98,17 @@ const isDisabled = computed(() => modalProps.availability === amount.value)
             </button>
           </div>
         </div>
+      </div>
+      <div class="map-container">
+        <h1 class="title"><font-awesome-icon icon="location-dot" /> Location</h1>
+        <iframe
+          :src="modalProps.map"
+          style="filter: invert(90%) hue-rotate(180deg)"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          class="map"
+        ></iframe>
       </div>
     </div>
   </Modal>
