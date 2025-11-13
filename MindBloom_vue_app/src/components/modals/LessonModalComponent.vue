@@ -12,6 +12,8 @@ const modalProps = defineProps([
   'availability',
   'id',
   'modalActive',
+  'tutor',
+  'date',
   'map',
 ])
 
@@ -59,10 +61,9 @@ const isDisabled = computed(() => modalProps.availability === amount.value)
           <img src="@/assets\mindbloomsvgbeige.svg" alt="" class="image" />
         </div>
         <div class="text-container">
-          <h1 class="title">{{ modalProps.topic }}</h1>
+          <h1 class="title">Lesson Overview</h1>
           <div class="spaces-display-container">
             <div class="icon-p-container" id="space-bar">
-              <font-awesome-icon icon="users" />
               <p id="spaces" class="description-text">Available spaces</p>
               <p id="spaces" class="description-text" v-if="modalProps.availability !== 0">
                 {{ modalProps.availability }} / 10
@@ -73,13 +74,27 @@ const isDisabled = computed(() => modalProps.availability === amount.value)
               <div class="bar" :style="barStyle" />
             </div>
           </div>
-          <div class="icon-p-container">
-            <font-awesome-icon icon="location-dot" />
-            <p id="location" class="description-text">{{ modalProps.location }}</p>
-          </div>
-          <div class="icon-p-container">
-            <font-awesome-icon icon="money-bill-wave" />
-            <p id="price" class="description-text">{{ modalProps.price }}</p>
+          <div class="details-container">
+            <div class="icon-p-container">
+              <font-awesome-icon icon="book" class="icon" />
+              <p class="description-text">{{ modalProps.topic }}</p>
+            </div>
+            <div class="icon-p-container">
+              <font-awesome-icon icon="person-chalkboard" class="icon" />
+              <p id="price" class="description-text">{{ modalProps.tutor }}</p>
+            </div>
+            <div class="icon-p-container">
+              <font-awesome-icon icon="location-dot" class="icon" />
+              <p id="location" class="description-text">{{ modalProps.location }}</p>
+            </div>
+            <div class="icon-p-container">
+              <font-awesome-icon icon="money-bill-wave" class="icon" />
+              <p id="price" class="description-text">{{ modalProps.price }}</p>
+            </div>
+            <div class="icon-p-container">
+              <font-awesome-icon icon="calendar" class="icon" />
+              <p id="price" class="description-text">{{ modalProps.date }}</p>
+            </div>
           </div>
 
           <div class="buttons-container" :class="{ compact: hidden }">
@@ -100,7 +115,7 @@ const isDisabled = computed(() => modalProps.availability === amount.value)
         </div>
       </div>
       <div class="map-container">
-        <h1 class="title"><font-awesome-icon icon="location-dot" /> Location</h1>
+        <h1 class="title">Location</h1>
         <iframe
           :src="modalProps.map"
           style="filter: invert(90%) hue-rotate(180deg)"

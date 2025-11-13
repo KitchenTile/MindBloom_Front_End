@@ -24,13 +24,14 @@
     & .text-container {
       background-color: #121212;
       position: relative;
-      width: 300px;
+      width: 500px;
       height: 200px;
       padding: 10px;
-      border-radius: 20px;
+      border-radius: 10px;
+      border: 1px solid #374151;
 
       & .title {
-        font-size: 26px;
+        font-size: 22px;
         color: #fff;
         padding-left: 6px;
       }
@@ -40,17 +41,28 @@
         height: 39px;
         background-color: #202020;
         border-radius: 5px;
-        margin-bottom: 9px;
+        margin-block: 9px;
+      }
+
+      & .details-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, 1fr);
       }
 
       & .icon-p-container {
         display: flex;
         flex-direction: row;
-        gap: 5px;
-        margin-block: 5px;
+        gap: 7px;
+        margin-block: 6px;
         font-size: 13px;
         align-items: center;
         padding-left: 6px;
+
+        & .icon {
+          color: white;
+          font-size: 14px;
+        }
 
         &#space-bar {
           justify-content: space-between;
@@ -71,11 +83,13 @@
 
       & .description-text {
         line-height: 16px;
+        font-size: 16px;
 
         &#spaces {
           line-height: 6px;
           font-size: 14px;
           padding-left: 0;
+          color: white;
         }
       }
 
@@ -155,12 +169,14 @@
 
   .map-container {
     .title {
-      color: white;
+      font-size: 22px;
+      color: #fff;
+      padding-left: 6px;
       padding-block: 10px;
     }
     & .map {
       border-radius: 15px;
-      width: 550px;
+      width: 750px;
       height: 300px;
       border: 0;
     }
