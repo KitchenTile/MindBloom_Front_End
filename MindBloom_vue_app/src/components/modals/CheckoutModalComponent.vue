@@ -21,6 +21,10 @@ const phoneNumber = ref(null)
 const guestCheckout = ref(false)
 const lessonsInfo = ref(cardInfo)
 
+watch(currentUser, (newUser) => {
+  console.log(newUser)
+})
+
 const computedOrder = computed(() =>
   lessonsInfo.value
     .map((lesson) => {
@@ -62,15 +66,14 @@ const placeOrderCall = async () => {
   <main>
     <Modal :modalActive="modalProps.modalActive" @closeModal="closeModal">
       <div class="profile-container">
-        <div class="form" v-if="user === null">
+        <div class="form">
           <div class="logo-title-container">
             <Logo />
             <h1 class="title">Checkout</h1>
           </div>
-
           <div class="checkout-container">
-            <div v-if="!currentUser">
-              <h2 v-if="!guestCheckout">
+            <div v-if="!currentUser && !guestCheckout">
+              <h2>
                 Oh no! Seems like you're not logged in. Click
                 <span @click="loginModalActive = true" class="clickable-text">here to log in</span>
                 or
@@ -78,26 +81,31 @@ const placeOrderCall = async () => {
                   >check out as a guest</span
                 >
               </h2>
-              <div v-else class="order-recap-container">
-                <div class="total-container">
-                  <h2 class="total-text">TOTAL</h2>
-                  <h2 class="total-text">{{ orderTotal }}</h2>
-                </div>
-                <div class="lessons-container" v-for="(lesson, index) in computedOrder">
-                  <p>{{ lesson.topic }} x {{ lesson.amount }}</p>
-                  <p>{{ lesson.price * lesson.amount }}</p>
-                </div>
-                <span class="line" />
-                <div class="name-number-container">
-                  <input v-model="name" placeholder="Name" />
-                  <input v-model="phoneNumber" placeholder="Phone Number" />
-                </div>
-                <button @click="placeOrderCall" :disabled="isDisabled" class="button">
-                  PLACE ORDER
-                </button>
-              </div>
             </div>
-            <button @click="placeOrderCall" v-else class="button">PLACE ORDER</button>
+            <div v-if="currentUser !== null || guestCheckout" class="order-recap-container">
+              <div class="total-container">
+                <h2 class="total-text">TOTAL</h2>
+                <h2 class="total-text">{{ orderTotal }}</h2>
+              </div>
+              <div class="lessons-container" v-for="(lesson, index) in computedOrder">
+                <p>{{ lesson.topic }} x {{ lesson.amount }}</p>
+                <p>{{ lesson.price * lesson.amount }}</p>
+              </div>
+              <span class="line" />
+              <div class="name-number-container">
+                <input v-model="name" placeholder="Name" v-if="!currentUser" />
+                <p class="checkout-text-user" v-else>
+                  {{ currentUser.identities[0].identity_data.full_name }}
+                </p>
+                <input v-model="phoneNumber" placeholder="Phone Number" v-if="!currentUser" />
+                <p class="checkout-text-user" v-else>
+                  {{ currentUser.identities[0].identity_data.phone_number }}
+                </p>
+              </div>
+              <button @click="placeOrderCall" :disabled="isDisabled" class="button">
+                PLACE ORDER
+              </button>
+            </div>
           </div>
         </div>
       </div>
