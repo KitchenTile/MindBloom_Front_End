@@ -4,6 +4,7 @@ import './Search.css'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import LessonCard from '../cards/LessonCard.vue'
 import { cardInfo, fetchData } from '../../store/store'
+import ChatCard from '../cards/ChatCard.vue'
 
 const searchTerm = ref('')
 
@@ -33,13 +34,16 @@ onMounted(async () => {
       />
       <font-awesome-icon icon="magnifying-glass" class="search-icon" />
       <div class="search-results">
+        <div class="chat-suggesstion" v-if="searchTerm">
+          <ChatCard :searchTerm="searchTerm" />
+        </div>
         <div v-for="(lesson, index) in filteredLessons" :key="index" v-if="searchTerm">
           <LessonCard
             :id="lesson._id"
             :topic="lesson.topic"
             :price="lesson.price"
             :location="lesson.location"
-            :numOfSpaces="lesson.numOfSpaces"
+            :availability="lesson.availability"
             :search="true"
           />
         </div>
