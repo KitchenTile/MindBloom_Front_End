@@ -15,7 +15,7 @@ const closeButton = () => {
     <div class="modal" v-show="modalProps.modalActive">
       <transition name="inner-modal-animation">
         <div class="modal-inner" v-show="modalProps.modalActive">
-          <font-awesome-icon icon="xmark" class="icon" @click="closeButton" />
+          <font-awesome-icon icon="xmark" class="cross-icon" @click="closeButton" />
           <slot />
         </div>
       </transition>

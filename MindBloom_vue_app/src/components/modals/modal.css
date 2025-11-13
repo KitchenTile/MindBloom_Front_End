@@ -21,7 +21,7 @@
     min-width: 450px;
     height: auto;
 
-    & .icon {
+    & .cross-icon {
       position: absolute;
       right: 10px;
       top: 10px;
