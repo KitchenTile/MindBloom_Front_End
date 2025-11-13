@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import CartView from '../views/CartView.vue'
 import LessonsView from '../views/LessonsView.vue'
 import ProfileModalComponent from '../components/modals/ProfileModalComponent.vue'
+import ChatView from '../views/ChatView.vue'
 // import LogInModal from '../components/modals/ProfileModal.vue'
 
 const router = createRouter({
@@ -22,6 +23,11 @@ const router = createRouter({
       path: '/lessons',
       name: 'lessons',
       component: LessonsView,
+    },
+    {
+      path: '/chat',
+      name: 'chat',
+      component: ChatView,
     },
     {
       path: '/',
