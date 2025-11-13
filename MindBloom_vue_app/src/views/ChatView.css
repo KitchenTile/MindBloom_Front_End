@@ -1,0 +1,264 @@
+.chat-page-container {
+  height: 100vh;
+  width: 100vw;
+  padding-top: 6rem;
+
+  & .chats-chat-container {
+    display: flex;
+    flex-direction: row;
+    height: 90%;
+    width: 95vw;
+    max-width: 70em;
+    margin: 0 auto;
+
+    & .title-button-container {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 10px 5px 5px;
+      width: 100%;
+
+      & .chats-title {
+        font-size: 20px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: white;
+        padding-left: 10px;
+      }
+    }
+    & .add-chat-button {
+      font-size: 15px;
+      cursor: pointer;
+      padding: 5px 15px;
+      width: 90%;
+      font-weight: 600;
+      word-spacing: 2px;
+      margin-block: 10px 30px;
+      border-radius: 7px;
+      border: none;
+      background-color: hsla(160, 100%, 37%, 1);
+
+      &:hover {
+        background-color: rgb(0, 167, 112);
+      }
+    }
+
+    & .all-chats-container {
+      width: 25%;
+      background-color: rgba(0, 0, 0, 0.397);
+      border-radius: 0.375rem 0 0 0.375rem;
+      border: 1px solid #4b5563;
+      border-right-color: transparent;
+      padding: 1em 0;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+
+      & .chat {
+        display: flex;
+        flex-direction: row;
+        width: 90%;
+        align-items: center;
+        justify-content: space-between;
+        padding-right: 8px;
+        height: 40px;
+        margin-bottom: 10px;
+
+        &:hover {
+          background-color: rgb(31 41 55);
+          border-radius: 5px;
+
+          & .icon {
+            visibility: visible;
+          }
+        }
+
+        & .title-edit {
+          width: 70%;
+          background: transparent;
+          border: none;
+          color: white;
+        }
+
+        & .chat-button {
+          background-color: transparent;
+          border-radius: 5px;
+          border-color: transparent;
+          color: white;
+          text-align: left;
+          cursor: pointer;
+          font-size: 16px;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+        }
+        & .icon {
+          font-size: 13px;
+          cursor: pointer;
+          color: rgba(255, 255, 255, 0.491);
+          visibility: hidden;
+
+          &:hover {
+            color: rgb(255, 255, 255);
+          }
+        }
+
+        &.selected {
+          background-color: rgb(55 65 81);
+          border-radius: 0px 7px 7px 0px;
+
+          & .chat-tab {
+            width: 5px;
+            height: 40px;
+            background-color: hsla(160, 100%, 37%, 1);
+          }
+        }
+      }
+    }
+
+    & .chat-container {
+      display: flex;
+      flex: 1 1 auto;
+      background-color: rgba(0, 0, 0, 0.397);
+      border-radius: 0 0.375rem 0.375rem 0;
+      border: 1px solid #4b5563;
+      padding-top: 1em;
+      /* overflow: scroll; */
+      flex-direction: column;
+      /* justify-content: flex-end; */
+
+      & .chat-content-container {
+        display: flex;
+        height: calc(100% - 51px);
+        flex-direction: column;
+        background: transparent;
+        overflow-y: scroll;
+
+        & .chat-message-container {
+          display: flex;
+          justify-content: flex-start;
+
+          & .chat-message {
+            display: flex;
+            background-color: rgb(21 31 53);
+            padding: 0.5rem 1rem;
+            border-radius: 0.725rem;
+            width: auto;
+            max-width: 500px;
+            margin: 0.3em 0.5em;
+            color: white;
+            overflow: auto;
+            flex-wrap: wrap;
+            text-wrap: wrap;
+            height: auto;
+            border: 1px solid;
+            border-color: #4b5563;
+            white-space: pre-line;
+
+            & p {
+              word-break: break-all;
+            }
+          }
+          &.right {
+            justify-content: flex-end;
+
+            & .chat-message {
+              background-color: rgb(17, 24, 39);
+            }
+          }
+        }
+
+        & .loading {
+          margin: 10px;
+          width: 60px;
+          aspect-ratio: 4;
+          background:
+            no-repeat radial-gradient(circle closest-side, #383838 90%, #0000) 0% 50%,
+            no-repeat radial-gradient(circle closest-side, #383838 90%, #0000) 50% 50%,
+            no-repeat radial-gradient(circle closest-side, #383838 90%, #0000) 100% 50%;
+          background-size: calc(100% / 3) 100%;
+          animation: loading 0.75s linear infinite;
+        }
+      }
+
+      .chat-form-container {
+        width: 100%;
+        max-width: 36rem;
+        margin: 1rem auto;
+      }
+
+      .chat-form {
+        position: relative;
+      }
+
+      .chat-form:hover .chat-input {
+        border-color: #4b5563;
+      }
+
+      .chat-form:hover .chat-submit-icon {
+        color: hsla(160, 100%, 37%, 1);
+      }
+
+      .chat-input {
+        width: 100%;
+        background-color: rgba(17, 24, 39, 0.5);
+        border: 2px solid #374151;
+        color: #d1d5db;
+        border-radius: 0.375rem;
+        padding: 1rem 3.5rem 1rem 1.25rem;
+        transition: all 0.2s;
+      }
+
+      .chat-input::placeholder {
+        color: #6b7280;
+      }
+
+      .chat-input:focus {
+        outline: none;
+        box-shadow: 0 0 0 2px hsla(160, 100%, 37%, 1);
+        border-color: #1d5236;
+      }
+
+      .chat-submit-button {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        display: flex;
+        align-items: center;
+        padding-right: 1rem;
+        background: none;
+        border: none;
+        cursor: pointer;
+      }
+
+      .chat-submit-icon {
+        width: 22px;
+        height: 22px;
+        color: #6b7280;
+        transition: color 0.2s;
+      }
+    }
+  }
+}
+
+@keyframes loading {
+  33% {
+    background-size:
+      calc(100% / 3) 0,
+      calc(100% / 3) 100%,
+      calc(100% / 3) 100%;
+  }
+  50% {
+    background-size:
+      calc(100% / 3) 100%,
+      calc(100% / 3) 0,
+      calc(100% / 3) 100%;
+  }
+  66% {
+    background-size:
+      calc(100% / 3) 100%,
+      calc(100% / 3) 100%,
+      calc(100% / 3) 0%;
+  }
+}

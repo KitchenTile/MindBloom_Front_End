@@ -14,6 +14,7 @@ const isDisabled = computed(() => order.length === 0)
 <template>
   <div class="nav-search-container">
     <nav>
+      <RouterLink to="/chat" id="chat"> <font-awesome-icon icon="message" /> </RouterLink>
       <RouterLink to="/lessons" id="book"> <font-awesome-icon icon="book" /> </RouterLink>
       <RouterLink to="/cart" id="cart" :disabled="isDisabled" :class="{ disabled: isDisabled }">
         <font-awesome-icon icon="cart-shopping" />
