@@ -38,6 +38,9 @@ const filterLessons = computed(() => {
 })
 
 watch(filter.value, (newCriteria) => {
+  console.log(newCriteria)
+  console.log(filterCriteria)
+
   if (filterOpen) filterOpen.value = !filterOpen
 })
 
@@ -67,13 +70,13 @@ onMounted(() => {
             >
               <input
                 type="radio"
-                :id="criteria"
-                :name="criteria"
+                :id="`filter-${criteria}`"
+                name="criteria"
                 :value="criteria"
                 class="radio-input"
                 v-model="filter.criteria"
               />
-              <label :for="criteria">{{ criteria }}</label>
+              <label :for="`filter-${criteria}`">{{ criteria }}</label>
               <div class="ascdsc-container" :class="{ hidden: filterOpen }">
                 <input
                   type="radio"
@@ -119,6 +122,8 @@ onMounted(() => {
             :location="lesson.location"
             :availability="lesson.availability"
             :map="lesson.map"
+            :tutor="lesson.tutor"
+            :date="lesson.date"
             :modalActive="lessonModalActive.active && lessonModalActive.id === lesson._id"
           />
         </div>
