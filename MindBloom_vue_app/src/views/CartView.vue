@@ -7,11 +7,7 @@ import { order, addToOrder, user, cardInfo, fetchData, checkoutModalActive } fro
 import './CartView.css'
 import CheckoutModalComponent from '../components/modals/CheckoutModalComponent.vue'
 
-const currentUser = ref(user)
-const guestCheckout = ref(false)
 const loading = ref(false)
-const name = ref(null)
-const number = ref(null)
 
 const fullOrders = computed(() => {
   const cartItems = ref([])
@@ -28,20 +24,6 @@ const fullOrders = computed(() => {
 
   return cartItems.value
 })
-
-// const placeOrderCall = async () => {
-//   const result = await placeOrder({
-//     name: currentUser ? currentUser.value.identities[0].identity_data.full_name : name.value,
-//     phoneNumber: currentUser
-//       ? currentUser.value.identities[0].identity_data.phone_number
-//       : number.value,
-//     lessonsOrdered: order,
-//   })
-//   console.log(result)
-//   await updateLessons(result)
-//   clearOrder()
-//   fetchData()
-// }
 
 onMounted(() => {
   fetchData()
