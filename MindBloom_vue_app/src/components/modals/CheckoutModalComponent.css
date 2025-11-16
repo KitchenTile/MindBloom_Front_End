@@ -3,8 +3,6 @@
   border-radius: 10px;
   padding: 30px;
   width: 100%;
-  /* & .name-number-container {
-  } */
 
   & .title {
     font-weight: 600;
@@ -70,14 +68,28 @@
       }
     }
 
+    & .errors-container {
+      padding: 5px;
+
+      & .error-message {
+        color: #a53f3f;
+      }
+    }
+
     & .checkout-text-user {
       color: white;
       font-size: 16px;
     }
   }
+  & .checkout-message {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
 }
 
-& .button {
+.button {
   border-radius: 5px;
   padding: 4px 10px;
   color: black;
@@ -88,4 +100,26 @@
   font-weight: 600;
   height: 40px;
   margin-block: 10px;
+  transition: all 0.2s ease;
+
+  &.disabled {
+    background-color: transparent !important;
+    border-color: rgb(55 65 81) !important;
+    color: rgb(55 65 81) !important;
+    transition: all 0.2s ease;
+  }
+}
+.button-message {
+  border-radius: 5px;
+  padding: 4px 10px;
+  border: 2px solid #1d5236;
+  cursor: pointer;
+  width: 100%;
+  font-weight: 600;
+  height: 40px;
+  margin-block: 10px;
+  background-color: transparent;
+  color: #1d5236;
+  cursor: default;
+  text-align: center;
 }

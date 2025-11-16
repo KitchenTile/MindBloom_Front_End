@@ -48,6 +48,12 @@
           outline: none;
         }
       }
+
+      & .error-message {
+        padding: 0px 5px 5px 5px;
+        color: #a53f3f;
+        font-size: 14px;
+      }
       &#admin-check {
         flex-direction: row;
         align-items: center;

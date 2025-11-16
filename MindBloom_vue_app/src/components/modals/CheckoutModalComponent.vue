@@ -12,18 +12,43 @@ import './CheckoutModalComponent.css'
 import Modal from './Modal.vue'
 import { placeOrder, updateLessons } from '../../api/fetchAPI'
 import Logo from '../../assets/Logo.vue'
+import { validateName, validateNumber } from '../../utils/inputValidation'
 
 const modalProps = defineProps(['modalActive'])
 
-const name = ref('')
+const errors = ref({ name: null, phoneNumber: null })
 const currentUser = ref(user)
-const phoneNumber = ref(null)
+const name = ref(currentUser.value ? currentUser.value.identities[0].identity_data.full_name : '')
+const phoneNumber = ref(
+  currentUser.value ? currentUser.value.identities[0].identity_data.phone_number : null,
+)
 const guestCheckout = ref(false)
 const lessonsInfo = ref(cardInfo)
+const checkoutMessage = ref(false)
 
-watch(currentUser, (newUser) => {
-  console.log(newUser)
-})
+console.log(currentUser.value)
+
+watch(
+  () => name.value,
+  (newName) => {
+    if (!validateName(newName)) {
+      errors.value.name = 'Enter a valid name'
+    } else {
+      errors.value.name = null
+    }
+  },
+)
+
+watch(
+  () => phoneNumber.value,
+  (newPhoneNumber) => {
+    if (!validateNumber(newPhoneNumber)) {
+      errors.value.phoneNumber = 'Enter a valid phone number'
+    } else {
+      errors.value.phoneNumber = null
+    }
+  },
+)
 
 const computedOrder = computed(() =>
   lessonsInfo.value
@@ -37,7 +62,24 @@ const computedOrder = computed(() =>
     .filter(Boolean),
 )
 const isDisabled = computed(
-  () => order.length === 0 || name.value === null || name.value === '' || number.value === null,
+  () =>
+    order.length === 0 ||
+    name.value === null ||
+    name.value === '' ||
+    phoneNumber.value === null ||
+    phoneNumber.value.length !== 11 ||
+    errors.value.phoneNumber !== null ||
+    errors.value.name !== null,
+)
+
+console.log(
+  order.length === 0,
+  name.value === null,
+  name.value === '',
+  phoneNumber.value === null,
+  phoneNumber.value.length !== 11,
+  errors.value.phoneNumber !== null,
+  errors.value.name !== null,
 )
 
 const orderTotal = computed(() => {
@@ -46,19 +88,23 @@ const orderTotal = computed(() => {
 
 const closeModal = () => {
   checkoutModalActive.value = false
+  if (checkoutMessage.value) {
+    clearOrder()
+  }
+  checkoutMessage.value = false
 }
 
 const placeOrderCall = async () => {
   const result = await placeOrder({
-    name: currentUser ? currentUser.value.identities[0].identity_data.full_name : name.value,
-    phoneNumber: currentUser
+    name: currentUser.value ? currentUser.value.identities[0].identity_data.full_name : name.value,
+    phoneNumber: currentUser.value
       ? currentUser.value.identities[0].identity_data.phone_number
-      : number.value,
+      : phoneNumber.value,
     lessonsOrdered: order,
   })
   console.log(result)
   await updateLessons(result)
-  clearOrder()
+  checkoutMessage.value = true
 }
 </script>
 
@@ -85,11 +131,11 @@ const placeOrderCall = async () => {
             <div v-if="currentUser !== null || guestCheckout" class="order-recap-container">
               <div class="total-container">
                 <h2 class="total-text">TOTAL</h2>
-                <h2 class="total-text">{{ orderTotal }}</h2>
+                <h2 class="total-text">£{{ orderTotal }}</h2>
               </div>
               <div class="lessons-container" v-for="(lesson, index) in computedOrder">
                 <p>{{ lesson.topic }} x {{ lesson.amount }}</p>
-                <p>{{ lesson.price * lesson.amount }}</p>
+                <p>£{{ lesson.price * lesson.amount }}</p>
               </div>
               <span class="line" />
               <div class="name-number-container">
@@ -102,9 +148,24 @@ const placeOrderCall = async () => {
                   {{ currentUser.identities[0].identity_data.phone_number }}
                 </p>
               </div>
-              <button @click="placeOrderCall" :disabled="isDisabled" class="button">
+              <div class="errors-container" v-show="errors">
+                <p class="error-message">{{ errors.name }}</p>
+                <p class="error-message">{{ errors.phoneNumber }}</p>
+              </div>
+              <button
+                @click="placeOrderCall"
+                :disabled="isDisabled"
+                class="button"
+                :class="{ disabled: isDisabled }"
+                v-if="!checkoutMessage"
+              >
                 PLACE ORDER
               </button>
+              <div class="button-message" v-else>DONE</div>
+            </div>
+            <div class="checkout-message" v-if="checkoutMessage">
+              <h1 class="title">Order Placed!</h1>
+              <p>Thank you for your order of £{{ orderTotal }}</p>
             </div>
           </div>
         </div>
