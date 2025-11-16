@@ -39,7 +39,6 @@ const isDisabled = computed(() => cardProps.availability === amount.value)
 
 const openLessonModal = () => {
   lessonModalActive.value = { active: true, id: cardProps.id }
-  console.log(lessonModalActive.value)
 }
 </script>
 
