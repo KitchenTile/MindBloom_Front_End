@@ -5,18 +5,20 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import LessonCard from '../cards/LessonCard.vue'
 import { cardInfo, fetchData } from '../../store/store'
 import ChatCard from '../cards/ChatCard.vue'
+import { search } from '../../api/fetchAPI'
 
 const searchTerm = ref('')
+const searchResults = ref(null)
 
 const emit = defineEmits(['addToOrder'])
 
-const filteredLessons = computed(() => {
-  // if search term is emtpy return regular cardInfo
-  if (searchTerm.value.toLocaleLowerCase() === '') return cardInfo.value
-  return cardInfo.value.filter((info) =>
-    info.topic.toLowerCase().includes(searchTerm.value.toLocaleLowerCase()),
-  )
-})
+watch(
+  () => searchTerm.value,
+  async (newSearchTerm) => {
+    searchResults.value = await search(newSearchTerm)
+  },
+  { immediate: true },
+)
 
 onMounted(async () => {
   await fetchData()
@@ -35,9 +37,13 @@ onMounted(async () => {
       <font-awesome-icon icon="magnifying-glass" class="search-icon" />
       <div class="search-results">
         <div class="chat-suggesstion" v-if="searchTerm">
-          <ChatCard :searchTerm="searchTerm" />
+          <ChatCard :searchTerm="searchTerm.toLocaleLowerCase()" />
         </div>
-        <div v-for="(lesson, index) in filteredLessons" :key="index" v-if="searchTerm">
+        <div
+          v-for="(lesson, index) in searchResults"
+          :key="index"
+          v-if="searchTerm && searchResults !== undefined"
+        >
           <LessonCard
             :id="lesson._id"
             :topic="lesson.topic"

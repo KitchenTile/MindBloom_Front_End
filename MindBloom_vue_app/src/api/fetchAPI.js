@@ -12,6 +12,8 @@ export const placeOrder = async (order) => {
       throw new Error(`Failed to place orders: ${res.status} ${res.statusText}`)
     }
 
+    console.log(order)
+
     const data = await res.json()
     console.log('Order placed:', data)
 
@@ -222,6 +224,26 @@ export const uploadBook = async (file) => {
     const data = await res.json()
 
     console.log(data)
+    return data
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const search = async (searchTerm) => {
+  try {
+    // const res = await fetch(`${AWS_URL}/search/${searchTerm}`)
+    if (searchTerm === '') return
+
+    const res = await fetch(`http://localhost:5000/search/${searchTerm}`)
+
+    if (!res.ok) {
+      throw new Error(`Failed to search for lessons: ${res.status} ${res.statusText}`)
+    }
+
+    const data = await res.json()
+
+    // console.log(data)
     return data
   } catch (error) {
     console.log(error)
