@@ -4,7 +4,7 @@ import './LessonCard.css'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { order, addToOrder, lessonModalActive } from '../../store/store'
 
-const cardProps = defineProps(['topic', 'price', 'location', 'availability', 'id', 'search'])
+const cardProps = defineProps(['topic', 'price', 'location', 'availability', 'id', 'search', 'svg'])
 
 const amount = computed({
   get() {
@@ -46,10 +46,11 @@ const openLessonModal = () => {
   <div class="card-container" :class="{ search: search }">
     <div class="image-container" @click="openLessonModal" :class="{ search: search }">
       <font-awesome-icon icon="book-open" class="book-icon" />
-      <svg width="100" height="100" :class="{ search: search }">
+      <svg width="100" height="100" :class="{ search: search }" class="right-circle">
         <circle cx="50" cy="50" r="50" fill="#1d5236" />
       </svg>
-      <img src="@/assets\mindbloomsvgbeige.svg" alt="" class="image" />
+      <!-- <img src="@/assets\mindbloomsvgbeige.svg" alt="" class="image" /> -->
+      <font-awesome-icon :icon="cardProps.svg" class="image" :class="{ search: search }" />
     </div>
     <div class="text-container" :class="{ search: search }">
       <h1 class="title">{{ cardProps.topic }}</h1>
