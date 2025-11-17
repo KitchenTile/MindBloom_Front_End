@@ -114,6 +114,7 @@ onMounted(() => {
             :location="lesson.location"
             :availability="lesson.availability"
             :search="false"
+            :svg="lesson.svg"
           />
           <LessonModalComponent
             :id="lesson._id"
@@ -124,6 +125,7 @@ onMounted(() => {
             :map="lesson.map"
             :tutor="lesson.tutor"
             :date="lesson.date"
+            :svg="lesson.svg"
             :modalActive="lessonModalActive.active && lessonModalActive.id === lesson._id"
           />
         </div>
