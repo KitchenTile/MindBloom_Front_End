@@ -38,9 +38,10 @@ onMounted(() => {
   <main>
     <Header />
 
-    <div class="lesson-page-container">
+    <div class="cart-page-container">
       <div class="title-icon-contaianer">
         <h1 class="title">Your Cart</h1>
+        <button @click="checkoutModalActive = true" class="button">Proceed To Checkout</button>
       </div>
       <div class="all-cards-container">
         <div v-for="lesson in fullOrders" :key="lesson._id">
@@ -50,11 +51,11 @@ onMounted(() => {
             :price="lesson.price"
             :location="lesson.location"
             :availability="lesson.availability"
+            :svg="lesson.svg"
             @addToOrder="addToOrder"
           />
         </div>
       </div>
-      <button @click="checkoutModalActive = true" class="button">Proceed To Checkout</button>
       <CheckoutModalComponent :modalActive="checkoutModalActive" />
     </div>
   </main>

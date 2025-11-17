@@ -1,21 +1,30 @@
-.lesson-page-container {
-  height: 100vh;
+.cart-page-container {
+  min-height: 100vh;
   width: 100vw;
   padding-top: 8rem;
+  padding-inline: 20px;
 
   & .all-cards-container {
     display: flex;
     flex-direction: row;
+    max-width: 96vw;
+    overflow: scroll;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
   }
 
   & .title-icon-contaianer {
     display: flex;
     flex-direction: row;
     gap: 20px;
+    padding-inline: 20px;
     align-items: center;
+    justify-content: space-between;
 
     & .title {
-      font-size: 24px;
+      font-size: 28px;
+      color: white;
+      font-weight: 600;
     }
 
     & .icon {
@@ -35,7 +44,7 @@
     background-color: hsla(160, 100%, 37%, 1);
     border: 2px solid #1d5236;
     cursor: pointer;
-    width: 100%;
+    width: 30%;
     font-weight: 600;
     height: 40px;
     margin-block: 10px;
