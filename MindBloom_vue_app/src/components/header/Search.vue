@@ -50,6 +50,7 @@ onMounted(async () => {
             :price="lesson.price"
             :location="lesson.location"
             :availability="lesson.availability"
+            :svg="lesson.svg"
             :search="true"
           />
         </div>
