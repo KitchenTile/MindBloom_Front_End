@@ -26,6 +26,21 @@ import {
   faMessage,
   faPersonChalkboard,
   faCalendar,
+  faSquareRootVariable,
+  faTableTennisPaddleBall,
+  faDumbbell,
+  faComputer,
+  faChessKnight,
+  faGamepad,
+  faMasksTheater,
+  faChartLine,
+  faEarthAmericas,
+  faPaintBrush,
+  faItalic,
+  faLaptopCode,
+  faMicrochip,
+  faFlaskVial,
+  faMusic,
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -47,6 +62,21 @@ library.add(
   faMessage,
   faPersonChalkboard,
   faCalendar,
+  faSquareRootVariable,
+  faTableTennisPaddleBall,
+  faDumbbell,
+  faComputer,
+  faChessKnight,
+  faGamepad,
+  faMasksTheater,
+  faChartLine,
+  faEarthAmericas,
+  faPaintBrush,
+  faItalic,
+  faLaptopCode,
+  faMicrochip,
+  faFlaskVial,
+  faMusic,
 )
 
 const app = createApp(App)
