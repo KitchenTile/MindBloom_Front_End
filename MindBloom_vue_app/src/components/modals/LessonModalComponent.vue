@@ -15,6 +15,7 @@ const modalProps = defineProps([
   'tutor',
   'date',
   'map',
+  'svg',
 ])
 
 const closeModal = () => {
@@ -58,7 +59,8 @@ const isDisabled = computed(() => modalProps.availability === amount.value)
     <div class="lesson-modal-container">
       <div class="img-info-container">
         <div class="image-container">
-          <img src="@/assets\mindbloomsvgbeige.svg" alt="" class="image" />
+          <!-- <img src="@/assets\mindbloomsvgbeige.svg" alt="" class="image" /> -->
+          <font-awesome-icon :icon="modalProps.svg" class="image" />
         </div>
         <div class="text-container">
           <h1 class="title">Lesson Overview</h1>
