@@ -9,6 +9,8 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
+    max-width: 1085px;
+    margin: 0 auto;
   }
 
   & .title-icon-contaianer {
@@ -97,6 +99,11 @@
         }
       }
     }
+  }
+
+  &.modalOpen {
+    overflow: hidden;
+    height: 100vh;
   }
 }
 

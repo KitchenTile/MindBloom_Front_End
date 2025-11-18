@@ -54,7 +54,7 @@ onMounted(() => {
     <Header />
 
     <div v-if="loading" class="loading">Loading...</div>
-    <div class="lesson-page-container">
+    <div class="lesson-page-container" :class="{ modalOpen: lessonModalActive.active }">
       <div class="title-icon-contaianer">
         <h1 class="title">All Lessons</h1>
         <div class="filter-container">
