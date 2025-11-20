@@ -49,15 +49,14 @@ const openLessonModal = () => {
       <svg width="100" height="100" :class="{ search: search }" class="right-circle">
         <circle cx="50" cy="50" r="50" fill="#1d5236" />
       </svg>
-      <!-- <img src="@/assets\mindbloomsvgbeige.svg" alt="" class="image" /> -->
-      <font-awesome-icon :icon="cardProps.svg" class="image" :class="{ search: search }" />
+      <font-awesome-icon :icon="cardProps.svg" class="image" />
     </div>
     <div class="text-container" :class="{ search: search }">
       <h1 class="title">{{ cardProps.topic }}</h1>
       <div :class="{ search: search }">
         <div class="spaces-display-container" v-if="!search">
           <div class="icon-p-container" id="space-bar">
-            <p id="spaces" class="description-text">Available spaces</p>
+            <p id="spaces" class="description-text icon">Available spaces</p>
             <p id="spaces" class="description-text" v-if="cardProps.availability !== 0">
               {{ cardProps.availability }} / 10
             </p>
@@ -68,18 +67,18 @@ const openLessonModal = () => {
           </div>
         </div>
         <div class="icon-p-container" v-else>
-          <font-awesome-icon icon="users" />
+          <font-awesome-icon icon="users" class="icon" />
           <p class="description-text" v-if="cardProps.availability !== 0">
             {{ cardProps.availability }}
           </p>
           <p id="full" class="description-text" v-else>full</p>
         </div>
         <div class="icon-p-container">
-          <font-awesome-icon icon="location-dot" />
+          <font-awesome-icon icon="location-dot" class="icon" />
           <p id="location" class="description-text">{{ cardProps.location }}</p>
         </div>
         <div class="icon-p-container">
-          <font-awesome-icon icon="money-bill-wave" />
+          <font-awesome-icon icon="money-bill-wave" class="icon" />
           <p id="price" class="description-text">{{ cardProps.price }}</p>
         </div>
       </div>
