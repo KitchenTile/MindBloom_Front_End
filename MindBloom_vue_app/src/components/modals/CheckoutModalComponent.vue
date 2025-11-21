@@ -26,7 +26,7 @@ const guestCheckout = ref(false)
 const lessonsInfo = ref(cardInfo)
 const checkoutMessage = ref(false)
 
-console.log(currentUser.value)
+// console.log(currentUser.value)
 
 watch(
   () => name.value,
@@ -70,16 +70,6 @@ const isDisabled = computed(
     phoneNumber.value.length !== 11 ||
     errors.value.phoneNumber !== null ||
     errors.value.name !== null,
-)
-
-console.log(
-  order.length === 0,
-  name.value === null,
-  name.value === '',
-  phoneNumber.value === null,
-  phoneNumber.value.length !== 11,
-  errors.value.phoneNumber !== null,
-  errors.value.name !== null,
 )
 
 const orderTotal = computed(() => {

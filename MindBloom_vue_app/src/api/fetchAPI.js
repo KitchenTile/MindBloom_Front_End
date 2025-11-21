@@ -232,9 +232,9 @@ export const uploadBook = async (file) => {
 
 export const search = async (searchTerm) => {
   try {
-    // const res = await fetch(`${AWS_URL}/search/${searchTerm}`)
     if (searchTerm === '') return
 
+    // const res = await fetch(`${AWS_URL}/search/${searchTerm}`)
     const res = await fetch(`http://localhost:5000/search/${searchTerm}`)
 
     if (!res.ok) {
