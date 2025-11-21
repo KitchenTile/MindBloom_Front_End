@@ -4,10 +4,11 @@ import './HomeView.css'
 import { getAllChats, handleChat, deleteChat, editChatTitle, login, logout } from '../api/fetchAPI'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { v4 as uuidv4 } from 'uuid'
-import { user } from '../store/store'
+import { cardInfo, user } from '../store/store'
 import { checkSession, supabase, userSessionCheck } from '../utils/supabase'
 import BookUploadCompoenet from '../components/BookUploadCompoenet.vue'
 import router from '../router'
+import Logo from '../assets/Logo.vue'
 
 const loading = ref(false)
 const prompt = ref('')
@@ -166,7 +167,30 @@ onMounted(async () => {
 <template>
   <main>
     <div class="home-page-container">
-      <div class="title">HOME PAGE</div>
+      <p class="sub-text">Hybrid learning made <span class="accent">simple</span></p>
+      <h1 class="title">MIND <span class="accent">BLOOM</span>.</h1>
+      <div class="info-container">
+        <div class="info-left"></div>
+        <div class="info-right"></div>
+      </div>
+      <Logo />
+      <div class="carousel-title-container">
+        <h1 class="title">Let's learn together</h1>
+        <div class="carousel">
+          <div class="group">
+            <div v-for="(lesson, index) in cardInfo" :key="index" class="lesson-preview">
+              <font-awesome-icon :icon="lesson.svg" class="icon" />
+              <p>{{ lesson.topic }}</p>
+            </div>
+          </div>
+          <div class="group">
+            <div v-for="(lesson, index) in cardInfo" :key="index" class="lesson-preview">
+              <font-awesome-icon :icon="lesson.svg" class="icon" />
+              <p>{{ lesson.topic }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </main>
 </template>
