@@ -102,6 +102,18 @@
   margin-block: 10px;
   transition: all 0.2s ease;
 
+  &#lessons-button {
+    background-color: transparent;
+    color: white;
+    border-color: rgb(55 65 81);
+    transition: all 0.2s ease;
+
+    &:hover {
+      border-color: hsla(160, 100%, 37%, 1);
+      transition: all 0.2s ease;
+    }
+  }
+
   &.disabled {
     background-color: transparent !important;
     border-color: rgb(55 65 81) !important;

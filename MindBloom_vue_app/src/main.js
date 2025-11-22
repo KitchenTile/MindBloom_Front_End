@@ -41,6 +41,7 @@ import {
   faMicrochip,
   faFlaskVial,
   faMusic,
+  faChalkboardUser,
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -77,6 +78,7 @@ library.add(
   faMicrochip,
   faFlaskVial,
   faMusic,
+  faChalkboardUser,
 )
 
 const app = createApp(App)
