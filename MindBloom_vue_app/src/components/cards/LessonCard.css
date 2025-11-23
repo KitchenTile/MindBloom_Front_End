@@ -111,6 +111,10 @@
         font-size: 14px;
         padding-left: 0;
       }
+
+      &#full {
+        line-height: 6px;
+      }
     }
 
     & .buttons-container {

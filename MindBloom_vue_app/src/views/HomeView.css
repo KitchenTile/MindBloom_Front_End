@@ -1,5 +1,5 @@
 .home-page-container {
-  height: 100vh;
+  min-height: 100vh;
   width: 100vw;
   padding-top: 6rem;
   display: flex;
@@ -44,8 +44,8 @@
 
     & .info-left,
     .info-right {
-      height: 100%;
-      width: 41%;
+      min-height: 340px;
+      width: clamp(350px, 41%, 600px);
       border-radius: 10px;
       background-color: rgba(0, 0, 0, 0.75);
       z-index: 1;

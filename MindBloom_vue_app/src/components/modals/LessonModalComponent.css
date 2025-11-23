@@ -97,6 +97,9 @@
           padding-left: 0;
           color: white;
         }
+        &#full {
+          line-height: 6px;
+        }
       }
 
       & .buttons-container {
