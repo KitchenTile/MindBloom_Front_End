@@ -1,4 +1,4 @@
-const AWS_URL = 'http://mindbloom-backend-env.eba-awc55pm9.eu-north-1.elasticbeanstalk.com'
+const AWS_URL = 'https://mindbloom-backend-env.eba-awc55pm9.eu-north-1.elasticbeanstalk.com'
 
 export const placeOrder = async (order) => {
   try {
