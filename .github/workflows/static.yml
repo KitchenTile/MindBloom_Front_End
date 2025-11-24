@@ -34,22 +34,22 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '22' 
+          node-version: "22"
       - name: Install dependencies
         run: |
           cd MindBloom_vue_app
-          npm install        
+          npm install
       - name: Build the app
         run: |
           cd MindBloom_vue_app
-          npm run dev 
+          npm run build
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           # Upload entire repository
-          path: '.'
+          path: "."
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
