@@ -34,11 +34,15 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16' 
+          node-version: '22' 
       - name: Install dependencies
-        run: npm install
+        run: |
+          cd MindBloom_vue_app
+          npm install        
       - name: Build the app
-        run: npm run dev 
+        run: |
+          cd MindBloom_vue_app
+          npm run dev 
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
