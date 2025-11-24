@@ -134,7 +134,7 @@ async function fetchChats() {
 
     if (chats.value.length === 0) {
       console.log('No chats available')
-    } else {
+    } else if (chat.value.length === 0) {
       chatId.value = chats.value[0].chat_id
     }
   } catch (err) {

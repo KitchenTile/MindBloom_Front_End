@@ -234,8 +234,8 @@ export const search = async (searchTerm) => {
   try {
     if (searchTerm === '') return
 
-    // const res = await fetch(`${AWS_URL}/search/${searchTerm}`)
-    const res = await fetch(`http://localhost:5000/search/${searchTerm}`)
+    const res = await fetch(`${AWS_URL}/search/${searchTerm}`)
+    // const res = await fetch(`http://localhost:5000/search/${searchTerm}`)
 
     if (!res.ok) {
       throw new Error(`Failed to search for lessons: ${res.status} ${res.statusText}`)
